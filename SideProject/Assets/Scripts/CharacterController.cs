@@ -9,25 +9,14 @@ public abstract class CharacterController : MonoBehaviour
     public CharacterData character;
     public float moveSpeed = 3f;
 
-    [Header("當前目標位置")]
-    public Vector3 targetPos;
-
-    //[Header("是否抵達")]
-    //public bool isReached = false;
-
-    //[Header("是否抵達物件")]
-    //public bool isApproachingObject = false;
-
-    [SerializeField, Header("場景中可互動的物件")]
-    protected List<InteractObjectController> interactableObjects;
-    
-    [Header("正在互動中的物件")]
-    public InteractObjectController currentInteractingObj;
-
-    //[Header("是否在互動中")]
-    //public bool isInteracting = false;
-
-    private Coroutine moveCoroutine;
+    public enum ActionState
+    {
+        idle,
+        usingObject,
+        chatting,
+    }
+    [Header("角色狀態")]
+    public ActionState currentAction = ActionState.idle;
 
     public enum MovementState
     {
@@ -37,15 +26,20 @@ public abstract class CharacterController : MonoBehaviour
         approachingToObject, //npc
         //wandering, //npc
     }
-    public MovementState movementState = MovementState.none;
+    [Header("行動狀態")]
+    public MovementState currentMovement = MovementState.none;
 
-    public enum CharacterState
-    {
-        idle,
-        usingObject,
-        chatting,
-    }
-    public CharacterState characterState = CharacterState.idle;
+
+    [Header("當前目標位置")]
+    public Vector3 targetPos;
+
+    [SerializeField, Header("場景中可互動的物件")]
+    protected List<InteractObjectController> interactableObjects;
+    
+    [Header("正在互動中的物件")]
+    public InteractObjectController currentInteractingObj;
+
+    private Coroutine moveCoroutine;
 
     protected virtual void Start()
     {
@@ -71,8 +65,7 @@ public abstract class CharacterController : MonoBehaviour
 
     private IEnumerator MoveCoroutine()
     {
-        //isReached = false;
-        movementState = MovementState.moving;
+        currentMovement = MovementState.moving;
         
         Vector3 direction;
         const float precision = 0.1f;
@@ -88,8 +81,7 @@ public abstract class CharacterController : MonoBehaviour
         }
 
         transform.position = targetPos;
-        //isReached = true;
-        movementState = MovementState.reach;
+        currentMovement = MovementState.reach;
 
         Debug.Log("抵達" + targetPos);
     }

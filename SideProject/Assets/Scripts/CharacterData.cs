@@ -20,5 +20,8 @@ public class CharacterData : ScriptableObject
     //schedule
     //memory
 
+    public GameObject characterPrefab;
     public Vector3 currentLocation;
+    public string lastStayedScene;
+    public Vector3 lastLocation;
 }

@@ -4,6 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player", menuName = "ScriptableObjects/Character/Player", order = 0)]
-public class PlayerCharacter : CharacterData
+public class PlayerData : CharacterData
 {
 }

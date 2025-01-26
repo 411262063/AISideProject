@@ -7,7 +7,6 @@ using UnityEngine;
 public class NpcCtrl : CharacterController
 {
     [Space(25)]
-    //public bool isWandering = false;
     public float moveInterval = 3f;
     private Vector2 movementRange = new Vector2(20f, 15f);
     private float moveTimer = 0f;
@@ -22,9 +21,8 @@ public class NpcCtrl : CharacterController
 
     private void Update()
     {
-        //if (isInteracting || isApproachingObject || isWandering) return;
-        if (characterState != CharacterState.idle ||
-            movementState != MovementState.none) 
+        if (currentAction != ActionState.idle ||
+            currentMovement != MovementState.none) 
             return;
 
         moveTimer += Time.deltaTime;
@@ -51,7 +49,6 @@ public class NpcCtrl : CharacterController
 
     private void Wandering()
     {
-        //isWandering = true;
         //movementState = MovementState.wandering;
 
         Vector3 randomPos = new Vector3(
@@ -66,20 +63,18 @@ public class NpcCtrl : CharacterController
 
     private IEnumerator OnWanderingComplete()
     {
-        while (movementState == MovementState.moving)
+        while (currentMovement == MovementState.moving)
         {
             yield return null;
         }
         yield return new WaitForSeconds(wanderingCooldown);
-        //isWandering = false;
-        movementState = MovementState.none;
+        currentMovement = MovementState.none;
         DecideNextAction(); 
     }
 
     private void AttempToInteract()
     {
-        //isApproachingObject = true;
-        movementState = MovementState.approachingToObject;
+        currentMovement = MovementState.approachingToObject;
 
         InteractObjectController targetObj = interactableObjects[Random.Range(0, interactableObjects.Count)];
 
@@ -93,8 +88,7 @@ public class NpcCtrl : CharacterController
         }
         else
         {
-            //isApproachingObject = false;
-            movementState = MovementState.moving;
+            currentMovement = MovementState.none;
             DecideNextAction();
         }
     }
@@ -102,15 +96,13 @@ public class NpcCtrl : CharacterController
     private IEnumerator InteractingRoutine()
     {
         //Before reached to target pos
-        while (movementState == MovementState.moving)
+        while (currentMovement == MovementState.moving)
         {
             yield return null;
         }
-        //isApproachingObject = false;
 
         //During interaction
-        //isInteracting = true;
-        characterState = CharacterState.usingObject;
+        currentAction = ActionState.usingObject;
         Debug.Log("正在與" + currentInteractingObj.objectData.objectNameChi + "互動");
         yield return new WaitForSeconds(currentInteractingObj.objectData.duration);
 
@@ -119,8 +111,7 @@ public class NpcCtrl : CharacterController
         Debug.Log("結束與" + currentInteractingObj.objectData.objectNameChi + "互動");
         currentInteractingObj = null;
         yield return new WaitForSeconds(interactionCooldown);
-        //isInteracting = false;
-        characterState = CharacterState.idle;
+        currentAction = ActionState.idle;
         DecideNextAction();
     }
 }
