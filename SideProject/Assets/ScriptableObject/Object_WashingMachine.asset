@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 698b59f25f6137a4eab6ac2e199007dd, type: 3}
-  m_Name: Object_Test
+  m_Name: Object_WashingMachine
   m_EditorClassIdentifier: 
   objectVisual: {fileID: 0}
   objectNameChi: "\u6D17\u8863\u6A5F"
   objectNameEng: WashingMachine
-  duration: 2
+  description: 
+  duration: 3
   sound: {fileID: 0}

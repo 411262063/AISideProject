@@ -12,11 +12,11 @@ public abstract class CharacterController : MonoBehaviour
     [Header("當前目標位置")]
     public Vector3 targetPos;
 
-    [Header("是否抵達")]
-    public bool isReached = false;
+    //[Header("是否抵達")]
+    //public bool isReached = false;
 
-    [Header("是否抵達物件")]
-    public bool isApproachingObject = false;
+    //[Header("是否抵達物件")]
+    //public bool isApproachingObject = false;
 
     [SerializeField, Header("場景中可互動的物件")]
     protected List<InteractObjectController> interactableObjects;
@@ -24,17 +24,35 @@ public abstract class CharacterController : MonoBehaviour
     [Header("正在互動中的物件")]
     public InteractObjectController currentInteractingObj;
 
-    [Header("是否在互動中")]
-    public bool isInteracting = false;
+    //[Header("是否在互動中")]
+    //public bool isInteracting = false;
 
     private Coroutine moveCoroutine;
 
+    public enum MovementState
+    {
+        none,
+        moving,
+        reach,
+        approachingToObject, //npc
+        //wandering, //npc
+    }
+    public MovementState movementState = MovementState.none;
+
+    public enum CharacterState
+    {
+        idle,
+        usingObject,
+        chatting,
+    }
+    public CharacterState characterState = CharacterState.idle;
+
     protected virtual void Start()
     {
-        FindInteracableObjects();
+        GetInteracableObjects();
     }
 
-    public void FindInteracableObjects()
+    public void GetInteracableObjects()
     {
         interactableObjects.Clear();
         foreach (var obj in FindObjectsOfType<InteractObjectController>())
@@ -53,44 +71,13 @@ public abstract class CharacterController : MonoBehaviour
 
     private IEnumerator MoveCoroutine()
     {
-        isReached = false;
+        //isReached = false;
+        movementState = MovementState.moving;
+        
         Vector3 direction;
         const float precision = 0.1f;
         Debug.Log("準備前往" + targetPos);
 
-        //while (true)
-        //{
-        //    Vector3 currentPos = transform.position;
-        //    if (Mathf.Abs(currentPos.x - targetPos.x) > precision) //x向移動
-        //    {
-        //        direction = targetPos.x > currentPos.x ? Vector3.right : Vector3.left;
-        //        currentPos += direction * moveSpeed * Time.deltaTime;
-
-        //        if ((direction == Vector3.right && currentPos.x > targetPos.x) ||
-        //        (direction == Vector3.left && currentPos.x < targetPos.x))
-        //        {
-        //            currentPos.x = targetPos.x;
-        //        }
-        //    }
-        //    else if (Mathf.Abs(transform.position.y - targetPos.y) > precision)//y向移動
-        //    {
-        //        direction = targetPos.y > currentPos.y ? Vector3.up : Vector3.down;
-        //        transform.position += direction * moveSpeed * Time.deltaTime;
-
-        //        if ((direction == Vector3.up && currentPos.y > targetPos.y) ||
-        //        (direction == Vector3.down && currentPos.y < targetPos.y))
-        //        {
-        //            currentPos.y = targetPos.y;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        break;
-        //    }
-
-        //    transform.position = currentPos;
-        //    yield return null;
-        //}
 
         while (Vector3.Distance(transform.position, targetPos) > precision)
         {
@@ -101,7 +88,43 @@ public abstract class CharacterController : MonoBehaviour
         }
 
         transform.position = targetPos;
-        isReached = true;
+        //isReached = true;
+        movementState = MovementState.reach;
+
         Debug.Log("抵達" + targetPos);
     }
 }
+
+//while (true)
+//{
+//    Vector3 currentPos = transform.position;
+//    if (Mathf.Abs(currentPos.x - targetPos.x) > precision) //x向移動
+//    {
+//        direction = targetPos.x > currentPos.x ? Vector3.right : Vector3.left;
+//        currentPos += direction * moveSpeed * Time.deltaTime;
+
+//        if ((direction == Vector3.right && currentPos.x > targetPos.x) ||
+//        (direction == Vector3.left && currentPos.x < targetPos.x))
+//        {
+//            currentPos.x = targetPos.x;
+//        }
+//    }
+//    else if (Mathf.Abs(transform.position.y - targetPos.y) > precision)//y向移動
+//    {
+//        direction = targetPos.y > currentPos.y ? Vector3.up : Vector3.down;
+//        transform.position += direction * moveSpeed * Time.deltaTime;
+
+//        if ((direction == Vector3.up && currentPos.y > targetPos.y) ||
+//        (direction == Vector3.down && currentPos.y < targetPos.y))
+//        {
+//            currentPos.y = targetPos.y;
+//        }
+//    }
+//    else
+//    {
+//        break;
+//    }
+
+//    transform.position = currentPos;
+//    yield return null;
+//}
