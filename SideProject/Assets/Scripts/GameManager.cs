@@ -42,22 +42,8 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         currentScene = scene.name;
-        BuildNpcLastStayedInScene();
         UpdateActiveNpcs();
         PlayerInterfaceUi.Instance?.UpdateViewNpcButton();
-    }
-
-    private void BuildNpcLastStayedInScene()
-    {
-        foreach(NpcData npc in allNpcData)
-        {
-            if(npc.lastStayedScene == currentScene)
-            {
-                GameObject npcObject = Instantiate(npc.characterPrefab, npc.lastLocation, Quaternion.identity);
-                npcObject.name = npc.charNameEng;
-            }
-
-        }
     }
 
     private void UpdateActiveNpcs()
@@ -89,3 +75,17 @@ public class GameManager : MonoBehaviour
 
     }
 }
+
+
+//private void BuildNpcLastStayedInScene()
+//{
+//    foreach(NpcData npc in allNpcData)
+//    {
+//        if(npc.lastStayedScene == currentScene)
+//        {
+//            GameObject npcObject = Instantiate(npc.characterPrefab, npc.lastLocation, Quaternion.identity);
+//            npcObject.name = npc.charNameEng;
+//        }
+
+//    }
+//}

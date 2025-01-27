@@ -22,6 +22,9 @@ public class CharacterData : ScriptableObject
 
     public GameObject characterPrefab;
     public Vector3 currentLocation;
-    public string lastStayedScene;
-    public Vector3 lastLocation;
+    
 }
+
+//之後做 從上次場景、上次位置生成人物
+//public string lastStayedScene;
+//public Vector3 lastLocation;
