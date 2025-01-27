@@ -70,3 +70,331 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+SideProject/Assets/TextMesh Pro.meta
+SideProject/Assets/TextMesh Pro/Documentation.meta
+SideProject/Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf
+SideProject/Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Anton OFL.txt
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Anton OFL.txt.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Anton.ttf
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Anton.ttf.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Bangers - OFL.txt
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Bangers - OFL.txt.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Bangers.ttf
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Bangers.ttf.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Electronic Highway Sign.TTF
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Electronic Highway Sign.TTF.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Oswald-Bold - OFL.txt
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Oswald-Bold - OFL.txt.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Oswald-Bold.ttf
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Oswald-Bold.ttf.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Roboto-Bold.ttf
+SideProject/Assets/TextMesh Pro/Examples & Extras/Fonts/Roboto-Bold.ttf.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Materials.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Materials/Crate - Surface Shader Scene.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Materials/Crate - Surface Shader Scene.mat.meta
+SideProject/Assets/TextMesh Pro/Sprites/EmojiOne.png.meta
+SideProject/Assets/TextMesh Pro/Sprites/EmojiOne.png
+SideProject/Assets/TextMesh Pro/Sprites/EmojiOne.json.meta
+SideProject/Assets/TextMesh Pro/Sprites/EmojiOne.json
+SideProject/Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt.meta
+SideProject/Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt
+SideProject/Assets/TextMesh Pro/Sprites.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc
+SideProject/Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc
+SideProject/Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc
+SideProject/Assets/TextMesh Pro/Shaders/TMPro.cginc.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMPro.cginc
+SideProject/Assets/TextMesh Pro/Shaders/TMP_Sprite.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_Sprite.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader
+SideProject/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader.meta
+SideProject/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader
+SideProject/Assets/TextMesh Pro/Shaders.meta
+SideProject/Assets/TextMesh Pro/Resources/TMP Settings.asset.meta
+SideProject/Assets/TextMesh Pro/Resources/TMP Settings.asset
+SideProject/Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset.meta
+SideProject/Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset
+SideProject/Assets/TextMesh Pro/Resources/Style Sheets.meta
+SideProject/Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset.meta
+SideProject/Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset
+SideProject/Assets/TextMesh Pro/Resources/Sprite Assets.meta
+SideProject/Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt.meta
+SideProject/Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt
+SideProject/Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt.meta
+SideProject/Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt
+SideProject/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset.meta
+SideProject/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+SideProject/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat.meta
+SideProject/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat
+SideProject/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset.meta
+SideProject/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+SideProject/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat.meta
+SideProject/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat
+SideProject/Assets/TextMesh Pro/Resources/Fonts & Materials.meta
+SideProject/Assets/TextMesh Pro/Resources.meta
+SideProject/Assets/TextMesh Pro/Fonts/LiberationSans.ttf.meta
+SideProject/Assets/TextMesh Pro/Fonts/LiberationSans.ttf
+SideProject/Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt.meta
+SideProject/Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt
+SideProject/Assets/TextMesh Pro/Fonts.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Radial Quad.psd.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Radial Quad.psd
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Radial Double.psd.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Radial Double.psd
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Diagonal.psd.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Diagonal.psd
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Circle.psd.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Wipe Pattern - Circle.psd
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Text Overflow - Linked Text UI Screenshot.png.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Text Overflow - Linked Text UI Screenshot.png
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Text Overflow - Linked Text Image 1.png.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Text Overflow - Linked Text Image 1.png
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Sunny Days - Seamless.jpg.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Sunny Days - Seamless.jpg
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Small Crate_normal.jpg.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Small Crate_normal.jpg
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Small Crate_diffuse.jpg.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Small Crate_diffuse.jpg
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Mask Zig-n-Zag.psd.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Mask Zig-n-Zag.psd
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Vertical (Color).jpg.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Vertical (Color).jpg
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Horizontal (Color).jpg.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Horizontal (Color).jpg
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Diagonal (Color).jpg.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Gradient Diagonal (Color).jpg
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Fruit Jelly (B&W).jpg.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Fruit Jelly (B&W).jpg
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Floor Tiles 1 - diffuse.jpg.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Floor Tiles 1 - diffuse.jpg
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Floor Cement.jpg.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Floor Cement.jpg
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Brushed Metal 3.jpg.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures/Brushed Metal 3.jpg
+SideProject/Assets/TextMesh Pro/Examples & Extras/Textures.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Sprites/DropCap Numbers.psd.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Sprites/DropCap Numbers.psd
+SideProject/Assets/TextMesh Pro/Examples & Extras/Sprites/Default Sprites.png.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Sprites/Default Sprites.png
+SideProject/Assets/TextMesh Pro/Examples & Extras/Sprites.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/WarpTextExample.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/VertexZoom.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeB.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/VertexShakeA.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/VertexJitter.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/VertexColorCycler.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/VertexColorCycler.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMPro_InstructionOverlay.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMPro_InstructionOverlay.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_UiFrameRateCounter.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_UiFrameRateCounter.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_B.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_A.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextSelector_A.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextInfoDebugTool.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventHandler.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventHandler.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventCheck.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_TextEventCheck.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_PhoneNumberValidator.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_PhoneNumberValidator.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_FrameRateCounter.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_ExampleScript_01.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_ExampleScript_01.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_DigitValidator.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TMP_DigitValidator.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshSpawner.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshSpawner.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshProFloatingText.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TextMeshProFloatingText.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TextConsoleSimulator.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TextConsoleSimulator.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TeleType.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/TeleType.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/SkewTextExample.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/SimpleScript.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/SimpleScript.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/ShaderPropAnimator.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/ShaderPropAnimator.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/ObjectSpin.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/ObjectSpin.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/EnvMapAnimator.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/EnvMapAnimator.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/DropdownSample.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/DropdownSample.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/ChatController.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/ChatController.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/CameraController.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark04.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark04.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark03.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark03.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark02.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01_UGUI.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scripts.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/Benchmark (Floating Text).unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/Benchmark (Floating Text).unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/26 - Dropdown Placeholder Example.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/26 - Dropdown Placeholder Example.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/25 - Sunny Days Example.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/25 - Sunny Days Example.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/24 - Surface Shader Example.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/24 - Surface Shader Example.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/23 - Animating Vertex Attributes.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/23 - Animating Vertex Attributes.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/22 - Basic Scripting Example.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/22 - Basic Scripting Example.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/21 - Script Example.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/21 - Script Example.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/20 - Input Field with Scrollbar.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/20 - Input Field with Scrollbar.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/19 - Masking Texture & Soft Mask.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/19 - Masking Texture & Soft Mask.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/18 - ScrollRect & Masking & Layout.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/18 - ScrollRect & Masking & Layout.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/17 - Old Computer Terminal.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/17 - Old Computer Terminal.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/16 - Linked text overflow mode example.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/16 - Linked text overflow mode example.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/15 - Inline Graphics & Sprites.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/15 - Inline Graphics & Sprites.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/14 - Multi Font & Sprites.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/14 - Multi Font & Sprites.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/13 - Soft Hyphenation.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/13 - Soft Hyphenation.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/12a - Text Interactions.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/12a - Text Interactions.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/12 - Link Example.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/12 - Link Example.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/11 - The Style Tag.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/11 - The Style Tag.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/10 - Bullets & Numbered List Example.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/10 - Bullets & Numbered List Example.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/09 - Margin Tag Example.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/09 - Margin Tag Example.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/08 - Improved Text Alignment.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/08 - Improved Text Alignment.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/07 - Superscript & Subscript Example.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/07 - Superscript & Subscript Example.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/06 - Extra Rich Text Examples.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/06 - Extra Rich Text Examples.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/05 - Style Tags.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/05 - Style Tags.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/04 - Word Wrapping.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/04 - Word Wrapping.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/03 - Line Justification.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/03 - Line Justification.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/02 - Multi-line TextMesh Pro.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/02 - Multi-line TextMesh Pro.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/01-  Single Line TextMesh Pro.unity.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes/01-  Single Line TextMesh Pro.unity
+SideProject/Assets/TextMesh Pro/Examples & Extras/Scenes.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets/DropCap Numbers.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets/DropCap Numbers.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets/Default Sprite Asset.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets/Default Sprite Asset.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Sprite Assets.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - Surface.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - Surface.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - Drop Shadow.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Roboto-Bold SDF - Drop Shadow.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Oswald Bold SDF.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Oswald Bold SDF.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Soft Mask.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Soft Mask.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Overlay.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Overlay.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Metalic Green.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/LiberationSans SDF - Metalic Green.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Electronic Highway Sign SDF.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Electronic Highway Sign SDF.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF Logo.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF Logo.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF Glow.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF Glow.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Outline.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Outline.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Drop Shadow.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Bangers SDF - Drop Shadow.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Sunny Days.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Sunny Days.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Outline.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Outline.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Drop Shadow.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials/Anton SDF - Drop Shadow.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Fonts & Materials.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Yellow to Orange - Vertical.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Yellow to Orange - Vertical.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Light to Dark Green - Vertical.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Light to Dark Green - Vertical.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Dark to Light Green - Vertical.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Dark to Light Green - Vertical.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Blue to Purple - Vertical.asset.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets/Blue to Purple - Vertical.asset
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources/Color Gradient Presets.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Resources.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 2.prefab.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 2.prefab
+SideProject/Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 1.prefab.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Prefabs/TextMeshPro - Prefab 1.prefab
+SideProject/Assets/TextMesh Pro/Examples & Extras/Prefabs/Text Popup.prefab.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Prefabs/Text Popup.prefab
+SideProject/Assets/TextMesh Pro/Examples & Extras/Prefabs.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Materials/Small Crate_diffuse.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Materials/Small Crate_diffuse.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Surface Shader Scene.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Surface Shader Scene.mat
+SideProject/Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Logo Scene.mat.meta
+SideProject/Assets/TextMesh Pro/Examples & Extras/Materials/Ground - Logo Scene.mat
+/SideProject/Library
+/SideProject/Logs
+/SideProject/UserSettings
+/SideProject/obj
+/SideProject/Temp
