@@ -14,6 +14,7 @@ public abstract class CharacterController : MonoBehaviour
         idle,
         usingObject,
         chatting,
+        wandering,
     }
     [Header("角色狀態")]
     public ActionState currentAction = ActionState.idle;
@@ -24,7 +25,6 @@ public abstract class CharacterController : MonoBehaviour
         moving,
         reach,
         approachingToObject, //npc
-        //wandering, //npc
     }
     [Header("行動狀態")]
     public MovementState currentMovement = MovementState.none;

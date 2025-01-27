@@ -20,9 +20,8 @@ public class CharacterData : ScriptableObject
     //schedule
     //memory
 
-    public GameObject characterPrefab;
+    public GameObject characterAgent;
     public Vector3 currentLocation;
-    
 }
 
 //之後做 從上次場景、上次位置生成人物

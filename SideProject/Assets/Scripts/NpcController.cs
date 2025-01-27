@@ -4,7 +4,7 @@ using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public class NpcCtrl : CharacterController
+public class NpcController : CharacterController
 {
     [Space(25)]
     public float moveInterval = 3f;
@@ -37,12 +37,12 @@ public class NpcCtrl : CharacterController
     {
         if (interactableObjects.Count > 0 && Random.value > 0.5)
         {
-            Debug.Log("嘗試互動");
+            Debug.Log(character.charNameChi+ "嘗試互動");
             AttempToInteract();
         }
         else
         {
-            Debug.Log("隨便亂走");
+            Debug.Log(character.charNameChi + "隨便亂走");
             Wandering();
         }
     }
@@ -82,7 +82,7 @@ public class NpcCtrl : CharacterController
         {
             currentInteractingObj = targetObj;
             targetObj.interactionState = InteractObjectController.InteractionState.interacting;
-            Debug.Log("即將與" + currentInteractingObj.objectData.objectNameChi + "互動");
+            Debug.Log(character.charNameChi + "即將與" + currentInteractingObj.objectData.objectNameChi + "互動");
             MoveTo(targetObj.transform.position);
             StartCoroutine(InteractingRoutine());
         }
@@ -103,12 +103,12 @@ public class NpcCtrl : CharacterController
 
         //During interaction
         currentAction = ActionState.usingObject;
-        Debug.Log("正在與" + currentInteractingObj.objectData.objectNameChi + "互動");
+        Debug.Log(character.charNameChi + "正在與" + currentInteractingObj.objectData.objectNameChi + "互動");
         yield return new WaitForSeconds(currentInteractingObj.objectData.duration);
 
         //Finish interaction
         currentInteractingObj.interactionState = InteractObjectController.InteractionState.idle;
-        Debug.Log("結束與" + currentInteractingObj.objectData.objectNameChi + "互動");
+        Debug.Log(character.charNameChi + "結束與" + currentInteractingObj.objectData.objectNameChi + "互動");
         currentInteractingObj = null;
         yield return new WaitForSeconds(interactionCooldown);
         currentAction = ActionState.idle;

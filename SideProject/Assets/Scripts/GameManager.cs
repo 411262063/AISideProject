@@ -10,11 +10,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public PlayerData player;
     public List<NpcData> allNpcData; 
-    public List<NpcCtrl> activeNpcs; //在此場景中的npc
-    public string currentScene;
-
-    public CinemachineVirtualCamera playerCamera;
-    public CinemachineVirtualCamera topViewCamera;
+    public List<NpcController> activeNpcAgents; //在此場景中的npc
+    private static string currentScene;
 
     private void Awake()
     {
@@ -43,36 +40,25 @@ public class GameManager : MonoBehaviour
     {
         currentScene = scene.name;
         UpdateActiveNpcs();
-        PlayerInterfaceUi.Instance?.UpdateViewNpcButton();
+        PlayerInterfaceUi.Instance?.UpdateAllUiElements();
     }
 
     private void UpdateActiveNpcs()
     {
-        activeNpcs.Clear();
-        foreach (var npc in FindObjectsOfType<NpcCtrl>())
+        activeNpcAgents.Clear();
+        foreach (var npc in FindObjectsOfType<NpcController>())
         {
-            activeNpcs.Add(npc);
+            if (npc.character != null)
+            {
+                activeNpcAgents.Add(npc);
+                Debug.Log(npc.character.charNameChi);
+            }
         }
     }
 
     public string GetActiveScene()
     {
         return currentScene;
-    }
-
-    public void CameraFollowPlayer()
-    {
-
-    }
-
-    public void CameraFollowNpc(CharacterData npc)
-    {
-
-    }
-
-    public void CameraFullView()
-    {
-
     }
 }
 

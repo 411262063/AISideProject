@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Cinemachine;
 
 
 public class PlayerInterfaceUi : MonoBehaviour
 {
     public static PlayerInterfaceUi Instance; 
-    public Transform npcButtonsGrp;
+    public Transform npcCamButtonsGrp;
+    public GameObject npcCamButtonObj;
+
+    public CinemachineVirtualCamera dynamicCamera;
+    public CinemachineVirtualCamera topViewCamera;
 
     private void Awake()
     {
@@ -23,16 +28,32 @@ public class PlayerInterfaceUi : MonoBehaviour
         }
     }
 
-    public void UpdateViewNpcButton()
+    public void UpdateAllUiElements()
     {
-        for (int i = 0; i < GameManager.Instance.activeNpcs.Count; i++)
+        UpdateCameraButtonForNpc();
+    }
+
+    private void UpdateCameraButtonForNpc()
+    {
+        for (int i = 0; i < GameManager.Instance.activeNpcAgents.Count; i++)
         {
-            //npcButtonsGrp.GetChild(i).GetComponent<Button>().
+            GameObject npcCamButton = Instantiate(npcCamButtonObj, npcCamButtonsGrp);
+            npcCamButton.GetComponent<CharacterCameraButton>().InitializeNpcAndUi(GameManager.Instance.activeNpcAgents[i].character);
         }
     }
 
-    private void PassNpcTransform()
+    public void CameraFollowCharater(Transform followTransform)
+    {
+        dynamicCamera.Follow = followTransform;
+    }
+
+    public void CameraFullView()
     {
 
     }
+
+    //private IEnumerator SmoothCamera()
+    //{
+    //    Vector3 startPos = dynamicCamera.tr
+    //}
 }
