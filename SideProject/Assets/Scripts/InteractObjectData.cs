@@ -10,6 +10,6 @@ public class InteractObjectData : ScriptableObject
     public string objectNameEng;
     [TextArea(3,10)]
     public string description;
-    public float duration = 2f;
+    public float coolDown; 
     public AudioClip sound;
 }

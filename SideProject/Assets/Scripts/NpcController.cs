@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public class NpcController : CharacterController
+public class NpcController : AgentController
 {
     [Space(25)]
     public float moveInterval = 3f;
@@ -21,30 +22,30 @@ public class NpcController : CharacterController
 
     private void Update()
     {
-        if (currentAction != ActionState.idle ||
-            currentMovement != MovementState.none) 
-            return;
+        //if (currentAction != ActionState.idle ||
+        //    currentMovement != MovementState.none) 
+        //    return;
 
-        moveTimer += Time.deltaTime;
-        if(moveTimer >= moveInterval)
-        {
-            moveTimer = 0f;
-            DecideNextAction();
-        }
+        //moveTimer += Time.deltaTime;
+        //if(moveTimer >= moveInterval)
+        //{
+        //    moveTimer = 0f;
+        //    DecideNextAction();
+        //}
     }
 
     private void DecideNextAction()
     {
-        if (interactableObjects.Count > 0 && Random.value > 0.5)
-        {
-            Debug.Log(character.charNameChi+ "嘗試互動");
-            AttempToInteract();
-        }
-        else
-        {
-            Debug.Log(character.charNameChi + "隨便亂走");
-            Wandering();
-        }
+        //if (interactableObjects.Count > 0 && Random.value > 0.5)
+        //{
+        //    Debug.Log(character.charNameChi+ "嘗試互動");
+        //    AttempToInteract();
+        //}
+        //else
+        //{
+        //    Debug.Log(character.charNameChi + "隨便亂走");
+        //    Wandering();
+        //}
     }
 
     private void Wandering()
@@ -85,33 +86,12 @@ public class NpcController : CharacterController
             Debug.Log(character.charNameChi + "即將與" + currentInteractingObj.objectData.objectNameChi + "互動");
             MoveTo(targetObj.transform.position);
             StartCoroutine(InteractingRoutine());
+            DecideNextAction();
         }
         else
         {
             currentMovement = MovementState.none;
             DecideNextAction();
         }
-    }
-
-    private IEnumerator InteractingRoutine()
-    {
-        //Before reached to target pos
-        while (currentMovement == MovementState.moving)
-        {
-            yield return null;
-        }
-
-        //During interaction
-        currentAction = ActionState.usingObject;
-        Debug.Log(character.charNameChi + "正在與" + currentInteractingObj.objectData.objectNameChi + "互動");
-        yield return new WaitForSeconds(currentInteractingObj.objectData.duration);
-
-        //Finish interaction
-        currentInteractingObj.interactionState = InteractObjectController.InteractionState.idle;
-        Debug.Log(character.charNameChi + "結束與" + currentInteractingObj.objectData.objectNameChi + "互動");
-        currentInteractingObj = null;
-        yield return new WaitForSeconds(interactionCooldown);
-        currentAction = ActionState.idle;
-        DecideNextAction();
     }
 }

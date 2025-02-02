@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public abstract class CharacterController : MonoBehaviour
+public abstract class AgentController : MonoBehaviour
 {
     [Header("角色資料")]
     public CharacterData character;
     public float moveSpeed = 3f;
+
+    [Header("對話框")]
+    public GameObject speachBubble;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI speachText;
 
     public enum ActionState
     {
@@ -17,7 +24,8 @@ public abstract class CharacterController : MonoBehaviour
         wandering,
     }
     [Header("角色狀態")]
-    public ActionState currentAction = ActionState.idle;
+    public ActionState currentAction;
+    public ActionState previousAction;
 
     public enum MovementState
     {
@@ -43,6 +51,7 @@ public abstract class CharacterController : MonoBehaviour
 
     protected virtual void Start()
     {
+        EndSpeaking();
         GetInteracableObjects();
     }
 
@@ -63,7 +72,7 @@ public abstract class CharacterController : MonoBehaviour
         moveCoroutine = StartCoroutine(MoveCoroutine());
     }
 
-    private IEnumerator MoveCoroutine()
+    protected virtual IEnumerator MoveCoroutine()
     {
         currentMovement = MovementState.moving;
         
@@ -84,6 +93,53 @@ public abstract class CharacterController : MonoBehaviour
         currentMovement = MovementState.reach;
 
         Debug.Log("抵達" + targetPos);
+    }
+
+    protected IEnumerator InteractingRoutine()
+    {
+        //Before reached to target pos
+        while (currentMovement == MovementState.moving)
+        {
+            yield return null;
+        }
+
+        //During interaction
+        currentAction = ActionState.usingObject;
+        
+        yield return new WaitForSeconds(character.objectUsageTime);
+
+        //Finish interaction
+        currentInteractingObj.interactionState = InteractObjectController.InteractionState.idle;
+        
+        currentInteractingObj = null;
+        currentAction = ActionState.idle;
+    }
+
+    public void SetActionState(ActionState newState)
+    {
+        if (currentAction == newState) return;
+        previousAction = currentAction;
+        currentAction = newState;
+    }
+
+    public void RestorePreviousAction()
+    {
+        SetActionState(previousAction);
+    }
+
+    public void Speak(string speakLine)
+    {
+        if (!speachBubble.activeInHierarchy) speachBubble.SetActive(true);
+        nameText.text = character.charNameEng; //之後改成中文
+        speachText.text = speakLine;
+    }
+
+    public void EndSpeaking()
+    {
+        nameText.text = "";
+        speachText.text = "";
+        speachBubble.SetActive(false);
+        RestorePreviousAction();
     }
 }
 

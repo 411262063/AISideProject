@@ -20,6 +20,10 @@ MonoBehaviour:
   occupation: 
   interest: 
   personality: 
+  chatIntent: 0
+  objectUsageTime: 0
   description: 
   relationship: []
+  characterAgent: {fileID: 3620167919511052009, guid: 3e16b3108efdf8d4ea1810777cf3c247, type: 3}
   currentLocation: {x: 0, y: 0, z: 0}
+  agentMemory: 

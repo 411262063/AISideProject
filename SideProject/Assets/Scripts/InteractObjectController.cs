@@ -9,12 +9,10 @@ using UnityEngine.TextCore.Text;
 public class InteractObjectController : MonoBehaviour
 {
     public InteractObjectData objectData;
-    
     public GameObject hintPanel;
     public TextMeshProUGUI hintText;
-    
-    private bool isInteracting = false;
     private CharacterData interactingCharacter;
+    private Coroutine interactionRoutine;
 
     public enum InteractionState
     {
@@ -28,20 +26,24 @@ public class InteractObjectController : MonoBehaviour
         HideHintPanel();
     }
 
-    public bool CanInteract()
+    public void StartInteraction(CharacterData character, float usageTime)
     {
-        return !isInteracting;
+        if (interactionState == InteractionState.interacting) return;
+        interactingCharacter = character;
+        interactionState = InteractionState.interacting;
+        interactionRoutine = StartCoroutine(OnInteractionRoutine(usageTime));
     }
 
-    public void StartInteraction(CharacterData character)
+    private IEnumerator OnInteractionRoutine(float duration)
     {
-        isInteracting = true;
-        interactingCharacter = character;
+        Debug.Log(interactingCharacter.charNameChi + "正在與" + objectData.objectNameChi + "互動");
+        yield return new WaitForSeconds(duration);
+        EndInteraction();
     }
 
     public void EndInteraction()
     {
-        isInteracting = false;
+        Debug.Log(interactingCharacter.charNameChi + "結束與" + objectData.objectNameChi + "互動");
         interactingCharacter = null;
         HideHintPanel();
     }

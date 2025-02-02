@@ -1,17 +1,20 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerData player;
-    public List<NpcData> allNpcData; 
+    public List<NpcData> allNpcData;
+    public List<AgentController> activeAgents;
     public List<NpcController> activeNpcAgents; //在此場景中的npc
     private static string currentScene;
+    
+    
 
     private void Awake()
     {
@@ -39,19 +42,21 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         currentScene = scene.name;
-        UpdateActiveNpcs();
+        UpdateActiveAgentsAndNpcs();
         PlayerInterfaceUi.Instance?.UpdateAllUiElements();
     }
 
-    private void UpdateActiveNpcs()
+    private void UpdateActiveAgentsAndNpcs()
     {
+        activeAgents.Clear();
         activeNpcAgents.Clear();
+        activeAgents.Add(player.characterAgent.GetComponent<AgentController>());
         foreach (var npc in FindObjectsOfType<NpcController>())
         {
             if (npc.character != null)
             {
                 activeNpcAgents.Add(npc);
-                Debug.Log(npc.character.charNameChi);
+                activeAgents.Add(npc);
             }
         }
     }
@@ -60,6 +65,23 @@ public class GameManager : MonoBehaviour
     {
         return currentScene;
     }
+
+    public void DetectConversation()
+    {
+        for(int i = 0; i < activeAgents.Count; i++)
+        {
+            for (int j = 0; j < activeAgents.Count; j++)
+            {
+                float distance = Vector3.Distance(activeAgents[i].transform.position, activeAgents[j].transform.position);
+                if(distance < ChatManager.Instance.chatTriggerDistance)
+                {
+                    StartCoroutine(ChatManager.Instance.ManageConversation(activeAgents[i], activeAgents[j]));
+                }
+            }
+        }
+    }
+
+    
 }
 
 
@@ -72,6 +94,5 @@ public class GameManager : MonoBehaviour
 //            GameObject npcObject = Instantiate(npc.characterPrefab, npc.lastLocation, Quaternion.identity);
 //            npcObject.name = npc.charNameEng;
 //        }
-
 //    }
 //}
