@@ -9,10 +9,10 @@ public class PlayerController : AgentController
     void Update()
     {
         MoveOnKeyInput();
-        MoveOnMouseInput();
+        //MoveOnMouseInput();
     }
 
-    private void MoveOnKeyInput() //使用WASD行走時
+    private void MoveOnKeyInput()
     {
         Vector3 direction = Vector3.zero;
 
@@ -27,7 +27,7 @@ public class PlayerController : AgentController
         }
     }
 
-    private void MoveOnMouseInput() //點擊目標位置並尋找最佳路徑
+    private void MoveOnMouseInput()
     {
         if (Input.GetMouseButtonDown(0)) 
         {

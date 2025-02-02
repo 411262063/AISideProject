@@ -11,10 +11,8 @@ public class GameManager : MonoBehaviour
     public PlayerData player;
     public List<NpcData> allNpcData;
     public List<AgentController> activeAgents;
-    public List<NpcController> activeNpcAgents; //在此場景中的npc
+    public List<NpcController> activeNpcAgents;
     private static string currentScene;
-    
-    
 
     private void Awake()
     {
@@ -72,16 +70,17 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 0; j < activeAgents.Count; j++)
             {
+                if (activeAgents[i] == activeAgents[j]) continue;
+                
                 float distance = Vector3.Distance(activeAgents[i].transform.position, activeAgents[j].transform.position);
                 if(distance < ChatManager.Instance.chatTriggerDistance)
                 {
-                    StartCoroutine(ChatManager.Instance.ManageConversation(activeAgents[i], activeAgents[j]));
+                    ChatManager.Instance.ManageConversation(activeAgents[i], activeAgents[j]);
+                    break;
                 }
             }
         }
     }
-
-    
 }
 
 

@@ -15,6 +15,7 @@ public abstract class AgentController : MonoBehaviour
     public GameObject speachBubble;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI speachText;
+    public bool isSpeaking;
 
     public enum ActionState
     {
@@ -36,7 +37,6 @@ public abstract class AgentController : MonoBehaviour
     }
     [Header("行動狀態")]
     public MovementState currentMovement = MovementState.none;
-
 
     [Header("當前目標位置")]
     public Vector3 targetPos;
@@ -67,7 +67,6 @@ public abstract class AgentController : MonoBehaviour
     public virtual void MoveTo(Vector3 position)
     {
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
-
         targetPos = position;
         moveCoroutine = StartCoroutine(MoveCoroutine());
     }
@@ -80,7 +79,6 @@ public abstract class AgentController : MonoBehaviour
         const float precision = 0.1f;
         Debug.Log("準備前往" + targetPos);
 
-
         while (Vector3.Distance(transform.position, targetPos) > precision)
         {
             direction = (targetPos - transform.position).normalized;
@@ -91,7 +89,6 @@ public abstract class AgentController : MonoBehaviour
 
         transform.position = targetPos;
         currentMovement = MovementState.reach;
-
         Debug.Log("抵達" + targetPos);
     }
 
@@ -105,20 +102,20 @@ public abstract class AgentController : MonoBehaviour
 
         //During interaction
         currentAction = ActionState.usingObject;
-        
         yield return new WaitForSeconds(character.objectUsageTime);
 
         //Finish interaction
         currentInteractingObj.interactionState = InteractObjectController.InteractionState.idle;
-        
         currentInteractingObj = null;
         currentAction = ActionState.idle;
     }
 
     public void SetActionState(ActionState newState)
     {
-        if (currentAction == newState) return;
-        previousAction = currentAction;
+        if(currentAction != ActionState.chatting)//previousAction不需要儲存chatting的狀態
+        {
+            previousAction = currentAction; 
+        }
         currentAction = newState;
     }
 
@@ -133,9 +130,9 @@ public abstract class AgentController : MonoBehaviour
         nameText.text = character.charNameEng; //之後改成中文
         speachText.text = speakLine;
     }
-
     public void EndSpeaking()
     {
+        isSpeaking = false;
         nameText.text = "";
         speachText.text = "";
         speachBubble.SetActive(false);
