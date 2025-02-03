@@ -15,7 +15,6 @@ public abstract class AgentController : MonoBehaviour
     public GameObject speachBubble;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI speachText;
-    public bool isSpeaking;
 
     public enum ActionState
     {
@@ -32,96 +31,115 @@ public abstract class AgentController : MonoBehaviour
     {
         none,
         moving,
-        reach,
         approachingToObject, //npc
     }
     [Header("行動狀態")]
-    public MovementState currentMovement = MovementState.none;
+    public MovementState currentMovement;
+    public MovementState previousMovement;
 
     [Header("當前目標位置")]
     public Vector3 targetPos;
-
-    [SerializeField, Header("場景中可互動的物件")]
-    protected List<InteractObjectController> interactableObjects;
     
-    [Header("正在互動中的物件")]
-    public InteractObjectController currentInteractingObj;
+    [Header("正在使用中的物件")]
+    public UsableObjectController currentUsingObj;
 
     private Coroutine moveCoroutine;
 
     protected virtual void Start()
     {
         EndSpeaking();
-        GetInteracableObjects();
-    }
-
-    public void GetInteracableObjects()
-    {
-        interactableObjects.Clear();
-        foreach (var obj in FindObjectsOfType<InteractObjectController>())
-        {
-            interactableObjects.Add(obj);
-        }
     }
 
     public virtual void MoveTo(Vector3 position)
     {
+        SetMovementState(MovementState.moving);
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         targetPos = position;
-        moveCoroutine = StartCoroutine(MoveCoroutine());
+        moveCoroutine = StartCoroutine(MovingProcess());
     }
 
-    protected virtual IEnumerator MoveCoroutine()
+    public virtual void ApproachingToObject() 
     {
-        currentMovement = MovementState.moving;
-        
+        SetMovementState(MovementState.approachingToObject);
+        MoveTo(currentUsingObj.transform.position);
+        //前往物件與使用物件邏輯分開 
+        //之後玩家透過點擊物件觸發 (解決螢幕位置和ui打架的問題)
+    }
+
+    protected virtual IEnumerator MovingProcess()
+    {
         Vector3 direction;
         const float precision = 0.1f;
-        Debug.Log("準備前往" + targetPos);
 
         while (Vector3.Distance(transform.position, targetPos) > precision)
         {
             direction = (targetPos - transform.position).normalized;
             transform.position += direction * moveSpeed * Time.deltaTime;
 
+            if( currentMovement == MovementState.approachingToObject)
+            {
+                if (!currentUsingObj.CanBeUse()) 
+                {
+                    SetMovementState(MovementState.none);
+                    currentUsingObj = null;
+                    yield break; 
+                }
+            }
             yield return null;
         }
 
         transform.position = targetPos;
-        currentMovement = MovementState.reach;
-        Debug.Log("抵達" + targetPos);
+        OnReached();
     }
 
-    protected IEnumerator InteractingRoutine()
+    private void OnReached()
     {
-        //Before reached to target pos
-        while (currentMovement == MovementState.moving)
+        switch (currentMovement)
         {
-            yield return null;
+            case MovementState.moving:
+                SetMovementState(MovementState.none);
+                break;
+
+            case MovementState.approachingToObject:
+                SetMovementState(MovementState.none);
+                StartUsingObject();
+                break;
         }
+    }
 
-        //During interaction
-        currentAction = ActionState.usingObject;
-        yield return new WaitForSeconds(character.objectUsageTime);
+    private void StartUsingObject()
+    {
+        SetActionState(ActionState.usingObject);
+        currentUsingObj.StartUsingByAgent(this);
+    }
 
-        //Finish interaction
-        currentInteractingObj.interactionState = InteractObjectController.InteractionState.idle;
-        currentInteractingObj = null;
-        currentAction = ActionState.idle;
+    public void EndUsingByCurrentObj() //invoke by currentUsingObj
+    {
+        SetActionState(ActionState.idle);
+        SetMovementState(MovementState.none);
+        currentUsingObj = null;
     }
 
     public void SetActionState(ActionState newState)
     {
-        if(currentAction != ActionState.chatting)//previousAction不需要儲存chatting的狀態
-        {
-            previousAction = currentAction; 
-        }
+        previousAction = (currentAction != ActionState.chatting) ? currentAction : previousAction; //當前若為聊天狀態則不須存在previousAction
         currentAction = newState;
+    }
+
+    public void SetMovementState(MovementState newMove)
+    {
+        previousMovement = currentMovement;
+        currentMovement = newMove;
     }
 
     public void RestorePreviousAction()
     {
         SetActionState(previousAction);
+    }
+
+    public void RestorePreviousMovement()
+    {
+        SetMovementState(previousMovement);
     }
 
     public void Speak(string speakLine)
@@ -130,46 +148,20 @@ public abstract class AgentController : MonoBehaviour
         nameText.text = character.charNameEng; //之後改成中文
         speachText.text = speakLine;
     }
+
+    public void Respond(string speakLine)
+    {
+        if (!speachBubble.activeInHierarchy) speachBubble.SetActive(true);
+        nameText.text = character.charNameEng; //之後改成中文
+        speachText.text = speakLine;
+    }
+
     public void EndSpeaking()
     {
-        isSpeaking = false;
         nameText.text = "";
         speachText.text = "";
         speachBubble.SetActive(false);
         RestorePreviousAction();
+        RestorePreviousMovement();
     }
 }
-
-//while (true)
-//{
-//    Vector3 currentPos = transform.position;
-//    if (Mathf.Abs(currentPos.x - targetPos.x) > precision) //x向移動
-//    {
-//        direction = targetPos.x > currentPos.x ? Vector3.right : Vector3.left;
-//        currentPos += direction * moveSpeed * Time.deltaTime;
-
-//        if ((direction == Vector3.right && currentPos.x > targetPos.x) ||
-//        (direction == Vector3.left && currentPos.x < targetPos.x))
-//        {
-//            currentPos.x = targetPos.x;
-//        }
-//    }
-//    else if (Mathf.Abs(transform.position.y - targetPos.y) > precision)//y向移動
-//    {
-//        direction = targetPos.y > currentPos.y ? Vector3.up : Vector3.down;
-//        transform.position += direction * moveSpeed * Time.deltaTime;
-
-//        if ((direction == Vector3.up && currentPos.y > targetPos.y) ||
-//        (direction == Vector3.down && currentPos.y < targetPos.y))
-//        {
-//            currentPos.y = targetPos.y;
-//        }
-//    }
-//    else
-//    {
-//        break;
-//    }
-
-//    transform.position = currentPos;
-//    yield return null;
-//}

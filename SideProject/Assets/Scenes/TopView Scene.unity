@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 874427888}
   - component: {fileID: 874427887}
   m_Layer: 0
-  m_Name: VCam_Player
+  m_Name: VCam_Dynamic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -985,6 +985,35 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 714206eeb366a3f40b88a26e24b0bf5d, type: 3}
+--- !u!1001 &2193307873119449729
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3710468866653402934, guid: 3d876193c743e3244be3fc88acbf9964, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710468866653402934, guid: 3d876193c743e3244be3fc88acbf9964, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3710468866653402934, guid: 3d876193c743e3244be3fc88acbf9964, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7784915720913980469, guid: 3d876193c743e3244be3fc88acbf9964, type: 3}
+      propertyPath: m_Name
+      value: Npc_Bmo
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3d876193c743e3244be3fc88acbf9964, type: 3}
 --- !u!1001 &2574735152367158175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1056,7 +1085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8544086152902681043, guid: f47e2e02e8c385140b41dddcb39c1387, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.79
+      value: -8.18
       objectReference: {fileID: 0}
     - target: {fileID: 8544086152902681043, guid: f47e2e02e8c385140b41dddcb39c1387, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1393,6 +1422,7 @@ SceneRoots:
   - {fileID: 472689683}
   - {fileID: 7383420954879496855}
   - {fileID: 4434254751376341278}
+  - {fileID: 2193307873119449729}
   - {fileID: 2574735152367158175}
   - {fileID: 907055542}
   - {fileID: 8798621002105137561}

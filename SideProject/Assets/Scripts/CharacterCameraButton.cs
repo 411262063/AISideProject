@@ -27,7 +27,7 @@ public class CharacterCameraButton : MonoBehaviour
     {
         followCharacter = character;
         button.onClick.AddListener(() => PassCharacterTransform());
-        charNameText.text = character.charNameChi;
+        charNameText.text = character.charNameEng; //之後改成中文
         //charHeadImage.sprite = character.headVisual;
     }
 

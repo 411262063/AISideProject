@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public List<NpcData> allNpcData;
     public List<AgentController> activeAgents;
     public List<NpcController> activeNpcAgents;
+    public List<UsableObjectController> activeUsableObjects;
     private static string currentScene;
 
     private void Awake()
@@ -37,14 +38,20 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
+    private void Update()
+    {
+        //DetectConversation();
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         currentScene = scene.name;
-        UpdateActiveAgentsAndNpcs();
+        UpdateActiveAgents();
+        UpdateActiveUsableObjects();
         PlayerInterfaceUi.Instance?.UpdateAllUiElements();
     }
 
-    private void UpdateActiveAgentsAndNpcs()
+    private void UpdateActiveAgents()
     {
         activeAgents.Clear();
         activeNpcAgents.Clear();
@@ -59,6 +66,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void UpdateActiveUsableObjects()
+    {
+        activeUsableObjects.Clear();
+        foreach (var obj in FindObjectsOfType<UsableObjectController>())
+        {
+            activeUsableObjects.Add(obj);
+        }
+    }
+
     public string GetActiveScene()
     {
         return currentScene;
@@ -70,12 +86,12 @@ public class GameManager : MonoBehaviour
         {
             for (int j = 0; j < activeAgents.Count; j++)
             {
-                if (activeAgents[i] == activeAgents[j]) continue;
+                if (activeAgents[i] == activeAgents[j]) continue; //avoid same members
                 
                 float distance = Vector3.Distance(activeAgents[i].transform.position, activeAgents[j].transform.position);
                 if(distance < ChatManager.Instance.chatTriggerDistance)
                 {
-                    ChatManager.Instance.ManageConversation(activeAgents[i], activeAgents[j]);
+                    ChatManager.Instance.StartConversation(activeAgents[i], activeAgents[j]);
                     break;
                 }
             }

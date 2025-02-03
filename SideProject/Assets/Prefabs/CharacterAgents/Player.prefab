@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: saysaysaysaysaysaysay
+  m_text: 666666666666
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -283,6 +283,9 @@ MonoBehaviour:
   speachBubble: {fileID: 8763133270359927669}
   nameText: {fileID: 5496536013544347516}
   speachText: {fileID: 1967217956551267604}
+  isSpeaking: 0
+  currentAction: 2
+  previousAction: 0
   currentMovement: 0
   targetPos: {x: 0, y: 0, z: 0}
   interactableObjects: []
@@ -352,7 +355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

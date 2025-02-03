@@ -30,8 +30,7 @@ public class ChatManager : MonoBehaviour
         currentChatContent.Clear();
         if (File.Exists(filePath))
         {
-            currentChatContent.AddRange(File.ReadLines(filePath));
-            //ReadLines根據換行符號形成陣列
+            currentChatContent.AddRange(File.ReadLines(filePath)); //ReadLines根據換行符號形成陣列
         }
     }
 
@@ -40,25 +39,29 @@ public class ChatManager : MonoBehaviour
         return line.Contains(END_CONVERSATION_MARKER);
     }
 
-    public void ManageConversation(AgentController agentA, AgentController agentB)
+    public void StartConversation(AgentController agentA, AgentController agentB)
     {
         if ((agentA.character.chatIntent < 10 && agentB.character.chatIntent < 10) ||
             (agentA.currentAction == AgentController.ActionState.chatting || agentB.currentAction == AgentController.ActionState.chatting))
         {
-            Debug.Log(agentA.character.charNameChi + "和" + agentB.character.charNameChi + "聊天意願過低，或其中一人正在說話");
             return;
         }
+
+        agentA.character.AddRelationship(agentB.character);
+        agentB.character.AddRelationship(agentA.character);
 
         AgentController activeAgent = agentA.character.chatIntent >= agentB.character.chatIntent ? agentA : agentB;
         AgentController passiveAgent = (activeAgent == agentA) ? agentB : agentA;
         activeAgent.SetActionState(AgentController.ActionState.chatting);
+        activeAgent.SetMovementState(AgentController.MovementState.none);
         passiveAgent.SetActionState(AgentController.ActionState.chatting);
+        passiveAgent.SetMovementState(AgentController.MovementState.none);
        
         LoadChatContentFromFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "_Meee/AISideProject/ConversationTest.txt"));
-        StartCoroutine(DuringConversation(activeAgent, passiveAgent));
+        StartCoroutine(InConversation(activeAgent, passiveAgent));
     }
 
-    private IEnumerator DuringConversation(AgentController activeSpeaker, AgentController passiveSpeaker)
+    private IEnumerator InConversation(AgentController activeSpeaker, AgentController passiveSpeaker)
     {
         int index = 0;
         bool isActive = true;
@@ -67,9 +70,10 @@ public class ChatManager : MonoBehaviour
         {
             string currentLine = currentChatContent[index];
             if (CheckEndingPointOfChatting(currentLine)) break;
-            AgentController currentSpeaker = isActive ? activeSpeaker : passiveSpeaker;
-            currentSpeaker.Speak(currentLine);
-            Debug.Log(currentSpeaker.character.charNameChi + " speak " + currentLine);
+            //AgentController currentSpeaker = isActive ? activeSpeaker : passiveSpeaker;
+            //currentSpeaker.Speak(currentLine);
+            if (isActive) activeSpeaker.Speak(currentLine);
+            else passiveSpeaker.Respond(currentLine);
             yield return new WaitForSeconds(2f);
             isActive = !isActive;
             index++;

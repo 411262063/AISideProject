@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173b2596602ce8e4ca063a286e858105, type: 3}
+  m_Name: Npc_Bmo
+  m_EditorClassIdentifier: 
+  bodyVisual: {fileID: 0}
+  headVisual: {fileID: 0}
+  charNameChi: "\u6BD4\u83AB"
+  charNameEng: Bmo
+  age: 15
+  occupation: "\u9AD8\u4E2D\u751F"
+  interest: "\u770B\u98A8\u666F"
+  personality: 
+  chatIntent: 0
+  objectUsageTime: 5
+  description: 
+  relationship: []
+  characterAgent: {fileID: 0}
+  currentLocation: {x: 0, y: 0, z: 0}
+  agentMemory: 
