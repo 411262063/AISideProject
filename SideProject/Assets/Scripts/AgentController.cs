@@ -15,6 +15,7 @@ public abstract class AgentController : MonoBehaviour
     public GameObject speachBubble;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI speachText;
+    private float lastChatTime = -10f;
 
     public enum ActionState
     {
@@ -25,7 +26,8 @@ public abstract class AgentController : MonoBehaviour
     }
     [Header("角色狀態")]
     public ActionState currentAction;
-    private ActionState previousAction;
+    [SerializeField] 
+    protected ActionState previousAction;
 
     public enum MovementState
     {
@@ -36,22 +38,23 @@ public abstract class AgentController : MonoBehaviour
     }
     [Header("行動狀態")]
     public MovementState currentMovement;
-    private MovementState previousMovement;
-
+    [SerializeField] 
+    protected MovementState previousMovement;
+    protected Coroutine moveCoroutine;
+    
     [Header("當前目標位置")]
     public Vector3 targetPos;
     
     [Header("正在使用中的物件")]
     public UsableObjectController currentUsingObj;
 
-    private Coroutine moveCoroutine;
 
     protected virtual void Start()
     {
-        EndSpeaking();
+        NoneChattingUi();
     }
 
-    public virtual void MoveTo(Vector3 position)
+    protected virtual void MoveTo(Vector3 position)
     {
         MovementState newMovement = (currentUsingObj == null) ? MovementState.moving : MovementState.approachingToObject;
         SetMovementState(newMovement);
@@ -94,7 +97,7 @@ public abstract class AgentController : MonoBehaviour
         SetMovementState(MovementState.reachOrAtObject);
     }
 
-    public virtual IEnumerator UsingCurrentObjectProcess()
+    protected virtual IEnumerator UsingCurrentObjectProcess()
     {
         while(currentMovement != MovementState.reachOrAtObject)
         {
@@ -118,48 +121,68 @@ public abstract class AgentController : MonoBehaviour
         currentUsingObj = null;
     }
 
-    public void SetActionState(ActionState newState)
+    #region About Chat/Conversation
+    public bool CanStartNewChat()
     {
-        previousAction = (currentAction != ActionState.chatting) ? currentAction : previousAction; //當前若為聊天狀態則不須存在previousAction
-        currentAction = newState;
+        bool isFirstChat = lastChatTime < 0f;
+        return (character.chatIntent >= ChatManager.Instance.minChatIntent && 
+                currentAction != ActionState.chatting &&
+                currentAction != ActionState.usingObject &&
+                (isFirstChat || Time.time - lastChatTime >= character.chatCoolDown));
+    }
+    
+    public virtual void Chatting()
+    {
+        lastChatTime = Time.time;
+        SetActionState(ActionState.chatting);
+        SetMovementState(MovementState.none);
     }
 
-    public void SetMovementState(MovementState newMove)
+    public virtual void SpeakTo(string listenerName, string line)
     {
-        previousMovement = currentMovement;
-        currentMovement = newMove;
-    }
-
-    public void RestorePreviousAction()
-    {
-        SetActionState(previousAction);
-    }
-
-    public void RestorePreviousMovement()
-    {
-        SetMovementState(previousMovement);
-    }
-
-    public void Speak(string speakLine)
-    {
+        //把listenerName丟給ai
         if (!speachBubble.activeInHierarchy) speachBubble.SetActive(true);
-        nameText.text = character.charNameEng; //之後改成中文
-        speachText.text = speakLine;
+        nameText.text = character.charNameEng; //charNameChi
+        speachText.text = line;
     }
 
-    public void Respond(string speakLine)
+    public virtual void SummarizeConversation(string convRecord)
     {
-        if (!speachBubble.activeInHierarchy) speachBubble.SetActive(true);
-        nameText.text = character.charNameEng; //之後改成中文
-        speachText.text = speakLine;
+        character.AgentMemory += "[conv]" + convRecord;
+        NoneChattingUi();
+        RestorePreviousAction();
+        RestorePreviousMovement();
     }
 
-    public void EndSpeaking()
+    public void NoneChattingUi()
     {
         nameText.text = "";
         speachText.text = "";
         speachBubble.SetActive(false);
-        RestorePreviousAction();
-        RestorePreviousMovement();
     }
+    #endregion
+
+    #region About Action and Movement
+    protected virtual void SetActionState(ActionState newState)
+    {
+        //chatting or chattingCoolDown action no need to store in previousAction
+        previousAction = (currentAction != ActionState.chatting) ? currentAction : previousAction;
+        currentAction = newState;
+    }
+
+    protected virtual void SetMovementState(MovementState newMove)
+    {
+        previousMovement = currentMovement;
+        currentMovement = newMove;
+    }
+    protected virtual void RestorePreviousAction()
+    {
+        SetActionState(previousAction);
+    }
+
+    protected virtual void RestorePreviousMovement()
+    {
+        SetMovementState(previousMovement);
+    }
+    #endregion
 }

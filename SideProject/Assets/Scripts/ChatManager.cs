@@ -7,11 +7,21 @@ using System;
 public class ChatManager : MonoBehaviour
 {
     public static ChatManager Instance;
+    [Header("觸發對話最近距離")]
     public float chatTriggerDistance = 3f;
-    public int lowChatIntent = 10;
+
+    [Header("對話意願低標")]
+    public int minChatIntent = 10;
+
+    [Header("當前對話內容(暫時由Txt匯入)")]
     public List<string> currentChatContent = new List<string>();
-    public static string tempConvRecord;
+
+    [Header("對話中斷判斷")]
     public string END_CONVERSATION_MARKER = "END_CONVERSATION_MARKER";
+
+    [Header("全局對話紀錄")]
+    public static string GolbalConvRecord;
+    
 
     private void Awake()
     {
@@ -41,45 +51,44 @@ public class ChatManager : MonoBehaviour
 
     public void StartConversation(AgentController agentA, AgentController agentB)
     {
-        if ((agentA.character.chatIntent < 10 && agentB.character.chatIntent < 10) ||
-            (agentA.currentAction == AgentController.ActionState.chatting || agentB.currentAction == AgentController.ActionState.chatting))
-        {
-            return;
-        }
-
-        agentA.character.AddRelationship(agentB.character);
-        agentB.character.AddRelationship(agentA.character);
+        if (!(agentA.CanStartNewChat() && agentB.CanStartNewChat())) return;
 
         AgentController activeAgent = agentA.character.chatIntent >= agentB.character.chatIntent ? agentA : agentB;
         AgentController passiveAgent = (activeAgent == agentA) ? agentB : agentA;
-        activeAgent.SetActionState(AgentController.ActionState.chatting);
-        activeAgent.SetMovementState(AgentController.MovementState.none);
-        passiveAgent.SetActionState(AgentController.ActionState.chatting);
-        passiveAgent.SetMovementState(AgentController.MovementState.none);
-       
+        activeAgent.Chatting();
+        passiveAgent.Chatting();
+
         LoadChatContentFromFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "_Meee/AISideProject/ConversationTest.txt"));
-        StartCoroutine(InConversation(activeAgent, passiveAgent));
+        StartCoroutine(ConversationProcess(activeAgent, passiveAgent));
     }
 
-    private IEnumerator InConversation(AgentController activeSpeaker, AgentController passiveSpeaker)
+    private IEnumerator ConversationProcess(AgentController activeSpeaker, AgentController passiveSpeaker)
     {
         int index = 0;
         bool isActive = true;
+        string tempConvRecord = "";
+
+        //聊天開始  => 存[人名1, 人名2]，開始時間到tempConvRecord
+        tempConvRecord += "[" + activeSpeaker.character.charNameChi + "," + passiveSpeaker.character.charNameChi + "] 於 " + "" + " 開始聊天\n";
 
         while (index< currentChatContent.Count)
         {
-            string currentLine = currentChatContent[index];
+            string currentLine = currentChatContent[index]; //delete after
+            if (CheckEndingPointOfChatting(currentLine)) break; //delete after
+    
+            AgentController currentSpeaker = isActive ? activeSpeaker : passiveSpeaker;
+            currentSpeaker.SpeakTo(isActive ? passiveSpeaker.character.charNameChi : activeSpeaker.character.charNameChi, currentLine);
+            tempConvRecord += "[" + currentSpeaker.character.charNameChi + "] say " + currentLine + "\n";
             if (CheckEndingPointOfChatting(currentLine)) break;
-            //AgentController currentSpeaker = isActive ? activeSpeaker : passiveSpeaker;
-            //currentSpeaker.Speak(currentLine);
-            if (isActive) activeSpeaker.Speak(currentLine);
-            else passiveSpeaker.Respond(currentLine);
+
             yield return new WaitForSeconds(2f);
             isActive = !isActive;
             index++;
         }
 
-        activeSpeaker.EndSpeaking();
-        passiveSpeaker.EndSpeaking();
+        tempConvRecord += "[" + activeSpeaker.character.charNameChi + "," + passiveSpeaker.character.charNameChi + "] 於 " + "" + " 結束聊天\n";
+        GolbalConvRecord += tempConvRecord;
+        activeSpeaker.SummarizeConversation(tempConvRecord);
+        passiveSpeaker.SummarizeConversation(tempConvRecord);
     }
 }

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterCameraButton : MonoBehaviour
+public class AgentCameraButton : MonoBehaviour
 {
     public CharacterData followCharacter;
     public Button button;

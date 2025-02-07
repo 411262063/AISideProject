@@ -20,10 +20,20 @@ MonoBehaviour:
   occupation: "\u9AD8\u4E2D\u751F"
   interest: "\u770B\u98A8\u666F"
   personality: 
-  chatIntent: 0
+  chatIntent: 25
+  chatCoolDown: 30.4
   objectUsageTime: 5
   description: 
   relationship: []
   characterAgent: {fileID: 0}
   currentLocation: {x: 0, y: 0, z: 0}
-  agentMemory: 
+  AgentMemory: "[conv][\u5361\u6B50\u9B6F,\u6BD4\u83AB] \u65BC  \u958B\u59CB\u804A\u5929\n[\u5361\u6B50\u9B6F]
+    say 111111111111\n[\u6BD4\u83AB] say 222222222222\n[\u5361\u6B50\u9B6F] say 333333333333\n[\u6BD4\u83AB]
+    say 444444444444\n[\u5361\u6B50\u9B6F] say 555555555555\n[\u6BD4\u83AB] say 666666666666\n[\u5361\u6B50\u9B6F,\u6BD4\u83AB]
+    \u65BC  \u7D50\u675F\u804A\u5929\n[conv][\u73DA\u82B1,\u6BD4\u83AB] \u65BC  \u958B\u59CB\u804A\u5929\n[\u73DA\u82B1]
+    say 111111111111\n[\u6BD4\u83AB] say 222222222222\n[\u73DA\u82B1] say 333333333333\n[\u6BD4\u83AB]
+    say 444444444444\n[\u73DA\u82B1] say 555555555555\n[\u6BD4\u83AB] say 666666666666\n[\u73DA\u82B1,\u6BD4\u83AB]
+    \u65BC  \u7D50\u675F\u804A\u5929\n[conv][\u73DA\u82B1,\u6BD4\u83AB] \u65BC  \u958B\u59CB\u804A\u5929\n[\u73DA\u82B1]
+    say 111111111111\n[\u6BD4\u83AB] say 222222222222\n[\u73DA\u82B1] say 333333333333\n[\u6BD4\u83AB]
+    say 444444444444\n[\u73DA\u82B1] say 555555555555\n[\u6BD4\u83AB] say 666666666666\n[\u73DA\u82B1,\u6BD4\u83AB]
+    \u65BC  \u7D50\u675F\u804A\u5929\n"

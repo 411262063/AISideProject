@@ -47,7 +47,7 @@ public class PlayerInterfaceUi : MonoBehaviour
         for (int i = 0; i < GameManager.Instance.activeNpcAgents.Count; i++)
         {
             GameObject npcCamButton = Instantiate(npcCamButtonObj, npcCamButtonsGrp);
-            npcCamButton.GetComponent<CharacterCameraButton>().InitializeNpcAndUi(GameManager.Instance.activeNpcAgents[i].character);
+            npcCamButton.GetComponent<AgentCameraButton>().InitializeNpcAndUi(GameManager.Instance.activeNpcAgents[i].character);
         }
     }
 

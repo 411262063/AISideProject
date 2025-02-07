@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using System;
 
 public class NpcController : AgentController
 {
@@ -12,6 +13,8 @@ public class NpcController : AgentController
     private Vector2 movementRange = new Vector2(20f, 15f);
     private float moveTimer = 0f;
     public float nextActionCD = 2f;
+
+    private Action pausedAction;
 
     protected override void Start()
     {
@@ -34,7 +37,7 @@ public class NpcController : AgentController
 
     private void DecideNextAction()
     {
-        if (GameManager.Instance.activeUsableObjects.Count > 0 && Random.value > 0.5)
+        if (GameManager.Instance.usableObjects.Count > 0 && UnityEngine.Random.value > 0.5)
         {
             AttempToUseObject();
         }
@@ -53,12 +56,13 @@ public class NpcController : AgentController
         do
         {
             randomPos = new Vector3(
-            Random.Range(-movementRange.x, movementRange.x),
-            Random.Range(-movementRange.y, movementRange.y),
+            UnityEngine.Random.Range(-movementRange.x, movementRange.x),
+            UnityEngine.Random.Range(-movementRange.y, movementRange.y),
             0f);
         }
-        while (GameManager.Instance.activeUsableObjects.Exists(obj => Vector3.Distance(randomPos, obj.transform.position) < minDistance));
-
+        while (GameManager.Instance.usableObjects.Exists(obj => Vector3.Distance(randomPos, obj.transform.position) < minDistance));
+        //查找是否有物件距離randomPos過近並避開
+        currentUsingObj = null; //使MoveTo將狀態設為Moving 
         MoveTo(randomPos);
         StartCoroutine(WanderingProcess());
     }
@@ -73,10 +77,51 @@ public class NpcController : AgentController
         DecideNextAction(); 
     }
 
+    public override void Chatting()
+    {
+        if (moveCoroutine != null)
+        {
+            StopCoroutine(moveCoroutine);
+            moveCoroutine = null;
+        }
+
+        switch (currentMovement)
+        {
+            case MovementState.none:
+                pausedAction = () => DecideNextAction();
+                break;
+
+            case MovementState.moving:
+                pausedAction = () => MoveTo(targetPos);
+                break;
+
+            case MovementState.approachingToObject:
+                pausedAction = () => MoveTo(currentUsingObj.transform.position);
+                break;
+
+            case MovementState.reachOrAtObject:
+                if (currentAction == ActionState.usingObject)
+                    pausedAction = () => StartCoroutine(UsingCurrentObjectProcess());
+                else
+                    pausedAction = () => DecideNextAction();
+                break;
+
+        }
+
+        base.Chatting();
+    }
+
+    public override void SummarizeConversation(string convRecord)
+    {
+        base.SummarizeConversation(convRecord);
+        pausedAction?.Invoke();
+        pausedAction = null;
+    }
+
     private void AttempToUseObject()
     {
         currentUsingObj = null;
-        UsableObjectController targetObj = GameManager.Instance.activeUsableObjects[Random.Range(0, GameManager.Instance.activeUsableObjects.Count)];
+        UsableObjectController targetObj = GameManager.Instance.usableObjects[UnityEngine.Random.Range(0, GameManager.Instance.usableObjects.Count)];
 
         if (!targetObj.CanBeUse())
         {

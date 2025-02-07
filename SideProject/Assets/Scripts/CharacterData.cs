@@ -23,6 +23,8 @@ public class CharacterData : ScriptableObject
     public string personality;
     [Header("聊天意願")]
     public int chatIntent;
+    [Header("聊天冷卻時間")]
+    public float chatCoolDown;
     [Header("使用物件時間")]
     public float objectUsageTime;
     [Header("描述"),TextArea(3,10)]
@@ -36,11 +38,11 @@ public class CharacterData : ScriptableObject
     public GameObject characterAgent;
     public Vector3 currentLocation;
 
-    public string agentMemory;
+    public string AgentMemory;
     
     public void AddRelationship(CharacterData charToAdd)
     {
-        if (relationship.Contains(charToAdd)) return;
+        if (relationship.Contains(charToAdd) || charToAdd == null) return;
         relationship.Add(charToAdd);
     }
 }
