@@ -65,7 +65,7 @@ public class NpcController : AgentController
 
     private IEnumerator WanderingProcess()
     {
-        while (currentMovement != MovementState.reach)
+        while (currentMovement != MovementState.reachOrAtObject)
         {
             yield return null;
         }

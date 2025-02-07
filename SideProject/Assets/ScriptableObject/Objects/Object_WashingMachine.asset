@@ -16,5 +16,5 @@ MonoBehaviour:
   objectNameChi: "\u6D17\u8863\u6A5F"
   objectNameEng: WashingMachine
   description: 
-  duration: 3
+  coolDown: 10
   sound: {fileID: 0}

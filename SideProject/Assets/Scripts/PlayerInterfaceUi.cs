@@ -15,6 +15,9 @@ public class PlayerInterfaceUi : MonoBehaviour
     public CinemachineVirtualCamera dynamicCamera;
     public CinemachineVirtualCamera topViewCamera;
 
+    private int higherCamPriority = 10;
+    private int lowerCamPriority = 5;
+
     private void Awake()
     {
         if (Instance == null)
@@ -26,6 +29,12 @@ public class PlayerInterfaceUi : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        dynamicCamera.Priority = higherCamPriority;
+        topViewCamera.Priority = lowerCamPriority;
     }
 
     public void UpdateAllUiElements()
@@ -45,15 +54,18 @@ public class PlayerInterfaceUi : MonoBehaviour
     public void CameraFollowCharater(Transform followTransform)
     {
         dynamicCamera.Follow = followTransform;
+        SetVCamPriority(dynamicCamera, topViewCamera);
     }
 
     public void CameraFullView()
     {
-
+        topViewCamera.Follow = null;
+        SetVCamPriority(topViewCamera, dynamicCamera);
     }
 
-    //private IEnumerator SmoothCamera()
-    //{
-    //    Vector3 startPos = dynamicCamera.tr
-    //}
+    private void SetVCamPriority(CinemachineVirtualCamera activeCam, CinemachineVirtualCamera inactiveCam)
+    {
+        activeCam.Priority = higherCamPriority;
+        inactiveCam.Priority = lowerCamPriority;
+    }
 }

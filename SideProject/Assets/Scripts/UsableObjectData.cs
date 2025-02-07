@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Object_Name", menuName = "ScriptableObjects/InteractObjects/Object", order = 2)]
+[CreateAssetMenu(fileName = "Object_Name", menuName = "ScriptableObjects/UsableObject/NewObject", order = 2)]
 public class UsableObjectData : ScriptableObject
 {
     public Sprite objectVisual;

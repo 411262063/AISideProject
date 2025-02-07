@@ -23,6 +23,8 @@ public class UsableObjectController : MonoBehaviour
 
     private void Start()
     {
+        if (objectData == null)
+            Debug.Log(name + "沒有objectData");
         HideHintPanel();
     }
 
@@ -33,13 +35,18 @@ public class UsableObjectController : MonoBehaviour
 
     public void UsingByAgent(AgentController agent)
     {
-        agentInUse = agent;
-        usingState = UsingState.inUse;
-        StartCoroutine(AgentUsingProcess());
+        StartCoroutine(AgentUsingProcess(agent));
     }
 
-    private IEnumerator AgentUsingProcess()
+    private IEnumerator AgentUsingProcess(AgentController agent)
     {
+        agentInUse = agent;
+        if(agentInUse == null)
+        {
+            Debug.Log(objectData.objectNameChi + " 找不到正在使用的人 ");
+            yield break;
+        }
+        usingState = UsingState.inUse;
         Debug.Log(agentInUse.character.charNameChi + " 正在使用 " + objectData.objectNameChi);
         yield return new WaitForSeconds(agentInUse.character.objectUsageTime);
         Debug.Log(agentInUse.character.charNameChi + " 結束使用 " + objectData.objectNameChi);

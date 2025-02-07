@@ -31,7 +31,7 @@ public abstract class AgentController : MonoBehaviour
     {
         none,
         moving,
-        reach,
+        reachOrAtObject,
         approachingToObject,
     }
     [Header("行動狀態")]
@@ -91,19 +91,19 @@ public abstract class AgentController : MonoBehaviour
         }
 
         transform.position = targetPos;
-        SetMovementState(MovementState.reach);
+        SetMovementState(MovementState.reachOrAtObject);
     }
 
     public virtual IEnumerator UsingCurrentObjectProcess()
     {
-        while(currentMovement != MovementState.reach)
+        while(currentMovement != MovementState.reachOrAtObject)
         {
             yield return null;
         }
         if(currentUsingObj == null)
         {
             Debug.Log(character.charNameChi + " 在抵達後找不到 currentUsingObj，取消使用");
-            SetActionState(ActionState.idle);
+            EndUsingCurrentObject();
             yield break;
         }
         SetActionState(ActionState.usingObject);

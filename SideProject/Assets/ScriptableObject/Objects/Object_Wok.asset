@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 698b59f25f6137a4eab6ac2e199007dd, type: 3}
-  m_Name: Object_TV
+  m_Name: Object_Wok
   m_EditorClassIdentifier: 
   objectVisual: {fileID: 0}
-  objectNameChi: "\u96FB\u8996"
-  objectNameEng: TV
-  description: "\u53BB\u6C99\u767C\u4E0A\u770B\u96FB\u8996"
-  coolDown: 5
+  objectNameChi: "\u7092\u83DC\u934B"
+  objectNameEng: Wok
+  description: 
+  coolDown: 15
   sound: {fileID: 0}

@@ -16,5 +16,5 @@ MonoBehaviour:
   objectNameChi: "\u66F8\u684C"
   objectNameEng: Desk
   description: 
-  coolDown: 2
+  coolDown: 0
   sound: {fileID: 0}

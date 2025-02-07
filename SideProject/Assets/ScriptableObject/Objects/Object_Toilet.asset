@@ -16,5 +16,5 @@ MonoBehaviour:
   objectNameChi: "\u99AC\u6876"
   objectNameEng: Toilet
   description: 
-  duration: 1
+  coolDown: 3
   sound: {fileID: 0}
