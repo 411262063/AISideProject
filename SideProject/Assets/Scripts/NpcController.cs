@@ -11,7 +11,7 @@ public class NpcController : AgentController
     public float moveInterval = 3f;
     private Vector2 movementRange = new Vector2(20f, 15f);
     private float moveTimer = 0f;
-    public float wanderingCooldown = 2f;
+    public float nextActionCD = 2f;
 
     protected override void Start()
     {
@@ -20,8 +20,7 @@ public class NpcController : AgentController
 
     private void Update()
     {
-        if( currentAction == ActionState.idle ||
-            currentAction != ActionState.chatting ||
+        if( currentAction == ActionState.idle &&
             currentMovement == MovementState.none)
         {
             moveTimer += Time.deltaTime;
@@ -37,7 +36,7 @@ public class NpcController : AgentController
     {
         if (GameManager.Instance.activeUsableObjects.Count > 0 && Random.value > 0.5)
         {
-            AttempToInteract();
+            AttempToUseObject();
         }
         else
         {
@@ -66,31 +65,35 @@ public class NpcController : AgentController
 
     private IEnumerator WanderingProcess()
     {
-        while (currentMovement == MovementState.moving)
+        while (currentMovement != MovementState.reach)
         {
             yield return null;
         }
-        yield return new WaitForSeconds(wanderingCooldown);
+        yield return new WaitForSeconds(nextActionCD);
         DecideNextAction(); 
     }
 
-    private void AttempToInteract()
+    private void AttempToUseObject()
     {
+        currentUsingObj = null;
         UsableObjectController targetObj = GameManager.Instance.activeUsableObjects[Random.Range(0, GameManager.Instance.activeUsableObjects.Count)];
 
         if (!targetObj.CanBeUse())
         {
-            Debug.Log(character.charNameChi + "無法使用" + targetObj.objectData.objectNameChi + "，因為" + targetObj.agentInUse.character.charNameChi + "已經在使用");
-            currentUsingObj = null;
+            if (targetObj.agentInUse) 
+                Debug.Log(character.charNameChi + " 想要使用，但 " + targetObj.agentInUse.character.charNameChi + " 已經在使用 "); //物件進入冷卻前正在使用的人agentInUse已經被清空，先檢查null
+            else
+                Debug.Log(character.charNameChi + " 想要使用 " + targetObj.objectData.objectNameChi + " 但 還在冷卻中 ");
+            
             SetMovementState(MovementState.none);
             DecideNextAction();
-            return;
         }
         else
         {
-            Debug.Log(character.charNameChi + "即將使用" + targetObj.objectData.objectNameChi);
+            Debug.Log(character.charNameChi + " 即將使用 " + targetObj.objectData.objectNameChi);
             currentUsingObj = targetObj;
-            ApproachingToObject();
+            MoveTo(targetObj.transform.position);
+            StartCoroutine(UsingCurrentObjectProcess());
         }
     }
 }

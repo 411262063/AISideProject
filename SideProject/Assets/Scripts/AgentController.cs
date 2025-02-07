@@ -25,17 +25,18 @@ public abstract class AgentController : MonoBehaviour
     }
     [Header("角色狀態")]
     public ActionState currentAction;
-    public ActionState previousAction;
+    private ActionState previousAction;
 
     public enum MovementState
     {
         none,
         moving,
-        approachingToObject, //npc
+        reach,
+        approachingToObject,
     }
     [Header("行動狀態")]
     public MovementState currentMovement;
-    public MovementState previousMovement;
+    private MovementState previousMovement;
 
     [Header("當前目標位置")]
     public Vector3 targetPos;
@@ -52,18 +53,11 @@ public abstract class AgentController : MonoBehaviour
 
     public virtual void MoveTo(Vector3 position)
     {
-        SetMovementState(MovementState.moving);
+        MovementState newMovement = (currentUsingObj == null) ? MovementState.moving : MovementState.approachingToObject;
+        SetMovementState(newMovement);
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         targetPos = position;
         moveCoroutine = StartCoroutine(MovingProcess());
-    }
-
-    public virtual void ApproachingToObject() 
-    {
-        SetMovementState(MovementState.approachingToObject);
-        MoveTo(currentUsingObj.transform.position);
-        //前往物件與使用物件邏輯分開 
-        //之後玩家透過點擊物件觸發 (解決螢幕位置和ui打架的問題)
     }
 
     protected virtual IEnumerator MovingProcess()
@@ -76,44 +70,48 @@ public abstract class AgentController : MonoBehaviour
             direction = (targetPos - transform.position).normalized;
             transform.position += direction * moveSpeed * Time.deltaTime;
 
-            if( currentMovement == MovementState.approachingToObject)
+            if(currentMovement == MovementState.approachingToObject 
+                && Vector3.Distance(transform.position, targetPos) <= 1f)
             {
-                if (!currentUsingObj.CanBeUse()) 
+                if (!currentUsingObj.CanBeUse())
                 {
                     SetMovementState(MovementState.none);
+                    SetActionState(ActionState.idle);
+
+                    if (currentUsingObj.agentInUse)
+                        Debug.Log(character.charNameChi + " 接近 " + currentUsingObj.objectData.objectNameChi + " 時發現 " + currentUsingObj.agentInUse.character.charNameChi + " 正在使用，因此中離");
+                    else
+                        Debug.Log(character.charNameChi + " 接近 " + currentUsingObj.objectData.objectNameChi + " 時發現 還在冷卻中，因此中離");
+
                     currentUsingObj = null;
-                    yield break; 
+                    yield break;
                 }
             }
             yield return null;
         }
 
         transform.position = targetPos;
-        OnReached();
+        SetMovementState(MovementState.reach);
     }
 
-    private void OnReached()
+    public virtual IEnumerator UsingCurrentObjectProcess()
     {
-        switch (currentMovement)
+        while(currentMovement != MovementState.reach)
         {
-            case MovementState.moving:
-                SetMovementState(MovementState.none);
-                break;
-
-            case MovementState.approachingToObject:
-                SetMovementState(MovementState.none);
-                StartUsingObject();
-                break;
+            yield return null;
         }
-    }
-
-    private void StartUsingObject()
-    {
+        if(currentUsingObj == null)
+        {
+            Debug.Log(character.charNameChi + " 在抵達後找不到 currentUsingObj，取消使用");
+            SetActionState(ActionState.idle);
+            yield break;
+        }
         SetActionState(ActionState.usingObject);
-        currentUsingObj.StartUsingByAgent(this);
+        currentUsingObj.UsingByAgent(this);
     }
 
-    public void EndUsingByCurrentObj() //invoke by currentUsingObj
+
+    public void EndUsingCurrentObject() //invoke by currentUsingObj
     {
         SetActionState(ActionState.idle);
         SetMovementState(MovementState.none);

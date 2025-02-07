@@ -12,12 +12,12 @@ public class UsableObjectController : MonoBehaviour
     public GameObject hintPanel;
     public TextMeshProUGUI hintText;
     public AgentController agentInUse;
-    private Coroutine inUseRoutine;
 
     public enum UsingState
     {
         idle,
         inUse,
+        inCoolDown,
     }
     public UsingState usingState;
 
@@ -31,22 +31,23 @@ public class UsableObjectController : MonoBehaviour
         return usingState == UsingState.idle;
     }
 
-    public void StartUsingByAgent(AgentController agent)
+    public void UsingByAgent(AgentController agent)
     {
-        if (usingState == UsingState.inUse) return;
         agentInUse = agent;
         usingState = UsingState.inUse;
-        inUseRoutine = StartCoroutine(UsingProcess());
+        StartCoroutine(AgentUsingProcess());
     }
 
-    private IEnumerator UsingProcess()
+    private IEnumerator AgentUsingProcess()
     {
-        Debug.Log(agentInUse.character.charNameChi + "正在使用" + objectData.objectNameChi);
+        Debug.Log(agentInUse.character.charNameChi + " 正在使用 " + objectData.objectNameChi);
         yield return new WaitForSeconds(agentInUse.character.objectUsageTime);
-        Debug.Log(agentInUse.character.charNameChi + "結束使用" + objectData.objectNameChi);
-        usingState = UsingState.idle;
-        agentInUse.EndUsingByCurrentObj();
+        Debug.Log(agentInUse.character.charNameChi + " 結束使用 " + objectData.objectNameChi);
+        agentInUse.EndUsingCurrentObject();
         agentInUse = null;
+        usingState = UsingState.inCoolDown;
+        yield return new WaitForSeconds(objectData.coolDown);
+        usingState = UsingState.idle;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 2252292521176693768}
   - component: {fileID: 4444948531805749943}
   m_Layer: 0
-  m_Name: InteractionObj_Base
+  m_Name: UsableObj_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,7 +358,8 @@ MonoBehaviour:
   objectData: {fileID: 11400000, guid: bfbbe158c1cacaa4d99c30381330dc93, type: 2}
   hintPanel: {fileID: 555050466296414920}
   hintText: {fileID: 2212143149897119245}
-  interactionState: 0
+  agentInUse: {fileID: 0}
+  usingState: 0
 --- !u!61 &4444948531805749943
 BoxCollider2D:
   m_ObjectHideFlags: 0
