@@ -14,16 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyVisual: {fileID: 0}
   headVisual: {fileID: 0}
-  charNameChi: 
-  charNameEng: 
+  charNameChi: "\u73A9\u5BB6"
+  charNameEng: Player
   age: 0
   occupation: 
   interest: 
   personality: 
   chatIntent: 0
+  chatCoolDown: 0
   objectUsageTime: 0
   description: 
   relationship: []
+  AgentMemory: 
   characterAgent: {fileID: 3620167919511052009, guid: 3e16b3108efdf8d4ea1810777cf3c247, type: 3}
   currentLocation: {x: 0, y: 0, z: 0}
-  agentMemory: 
+  day: 1

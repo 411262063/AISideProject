@@ -77,7 +77,7 @@ public class NpcController : AgentController
         DecideNextAction(); 
     }
 
-    public override void Chatting()
+    public override void StartChattingWith(string listenerName)
     {
         if (moveCoroutine != null)
         {
@@ -108,7 +108,7 @@ public class NpcController : AgentController
 
         }
 
-        base.Chatting();
+        base.StartChattingWith(listenerName);
     }
 
     public override void SummarizeConversation(string convRecord)

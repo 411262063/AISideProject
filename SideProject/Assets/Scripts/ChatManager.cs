@@ -55,8 +55,8 @@ public class ChatManager : MonoBehaviour
 
         AgentController activeAgent = agentA.character.chatIntent >= agentB.character.chatIntent ? agentA : agentB;
         AgentController passiveAgent = (activeAgent == agentA) ? agentB : agentA;
-        activeAgent.Chatting();
-        passiveAgent.Chatting();
+        activeAgent.StartChattingWith(passiveAgent.character.charNameChi);
+        passiveAgent.StartChattingWith(activeAgent.character.charNameChi);
 
         LoadChatContentFromFile(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "_Meee/AISideProject/ConversationTest.txt"));
         StartCoroutine(ConversationProcess(activeAgent, passiveAgent));
@@ -69,26 +69,56 @@ public class ChatManager : MonoBehaviour
         string tempConvRecord = "";
 
         //聊天開始  => 存[人名1, 人名2]，開始時間到tempConvRecord
-        tempConvRecord += "[" + activeSpeaker.character.charNameChi + "," + passiveSpeaker.character.charNameChi + "] 於 " + "" + " 開始聊天\n";
+        tempConvRecord += $"[{activeSpeaker.character.charNameChi},{passiveSpeaker.character.charNameChi}] 於 {DateTime.Now.ToString("HH:mm")} 開始聊天\n";
 
         while (index< currentChatContent.Count)
         {
             string currentLine = currentChatContent[index]; //delete after
             if (CheckEndingPointOfChatting(currentLine)) break; //delete after
-    
-            AgentController currentSpeaker = isActive ? activeSpeaker : passiveSpeaker;
-            currentSpeaker.SpeakTo(isActive ? passiveSpeaker.character.charNameChi : activeSpeaker.character.charNameChi, currentLine);
-            tempConvRecord += "[" + currentSpeaker.character.charNameChi + "] say " + currentLine + "\n";
-            if (CheckEndingPointOfChatting(currentLine)) break;
 
+            if (isActive)
+            {
+                activeSpeaker.SayOrRespond(currentLine);
+                passiveSpeaker.Listen(currentLine);
+                tempConvRecord += $"[{activeSpeaker.character.charNameChi}] say {currentLine}\n";
+            }
+            else
+            {
+                passiveSpeaker.SayOrRespond(currentLine);
+                activeSpeaker.Listen(currentLine);
+                tempConvRecord += $"[{passiveSpeaker.character.charNameChi}] say {currentLine}\n";
+            } 
             yield return new WaitForSeconds(2f);
             isActive = !isActive;
             index++;
         }
 
-        tempConvRecord += "[" + activeSpeaker.character.charNameChi + "," + passiveSpeaker.character.charNameChi + "] 於 " + "" + " 結束聊天\n";
-        GolbalConvRecord += tempConvRecord;
+        tempConvRecord += $"[{activeSpeaker.character.charNameChi},{passiveSpeaker.character.charNameChi}] 於 {DateTime.Now.ToString("HH:mm")} 結束聊天";
+        GolbalConvRecord += $"{tempConvRecord}\n";
         activeSpeaker.SummarizeConversation(tempConvRecord);
         passiveSpeaker.SummarizeConversation(tempConvRecord);
+    }
+
+    public void SaveGlobalConvRecordToFile()
+    {
+        string folderPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "_Meee/AISideProject/");
+        string fileName = "GlobalConvRecord.txt";
+        string filePath = Path.Combine(folderPath, fileName);
+
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        if (File.Exists(filePath))
+        {
+            File.AppendAllText(filePath, GolbalConvRecord);
+        }
+        else
+        {
+            File.WriteAllText(filePath, GolbalConvRecord);
+        }
+
+        GolbalConvRecord = "";
     }
 }

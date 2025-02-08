@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class CharacterData : ScriptableObject
@@ -27,23 +30,49 @@ public class CharacterData : ScriptableObject
     public float chatCoolDown;
     [Header("使用物件時間")]
     public float objectUsageTime;
-    [Header("描述"),TextArea(3,10)]
+    [Header("描述"),TextArea(3, 20)]
     public string description;
-    [Header("人物關係")]
+    [Header("人際關係")]
     public List<CharacterData> relationship;
-
-    //schedule
-    //memory
-
+    [SerializeField, Header("記憶"), TextArea(5,20)]
+    private string AgentMemory;
+    [Header("")]
     public GameObject characterAgent;
     public Vector3 currentLocation;
 
-    public string AgentMemory;
-    
     public void AddRelationship(CharacterData charToAdd)
     {
         if (relationship.Contains(charToAdd) || charToAdd == null) return;
         relationship.Add(charToAdd);
+    }
+
+    public void SaveNewAgentMemory(string label, string memoryContent)
+    {
+        string timeStamp = DateTime.Now.ToString("HH:mm");
+        AgentMemory += $"[{label}]於{timeStamp} {memoryContent}\n";
+    }
+
+    public void SaveAgentMemoryToFile()
+    {
+        string folderPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop), "_Meee/AISideProject/AgentsMemory");
+        string fileName = $"{charNameEng}.txt";
+        string filePath = Path.Combine(folderPath, fileName);
+
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        if (File.Exists(filePath))
+        {
+            File.AppendAllText(filePath, AgentMemory);
+        }
+        else
+        {
+            File.WriteAllText(filePath, AgentMemory);
+        }
+
+        AgentMemory = "";
     }
 }
 

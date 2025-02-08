@@ -8,7 +8,10 @@ using Cinemachine;
 
 public class PlayerInterfaceUi : MonoBehaviour
 {
-    public static PlayerInterfaceUi Instance; 
+    public static PlayerInterfaceUi Instance;
+
+    public TextMeshProUGUI dayNumText;
+    
     public Transform npcCamButtonsGrp;
     public GameObject npcCamButtonObj;
 
@@ -39,7 +42,13 @@ public class PlayerInterfaceUi : MonoBehaviour
 
     public void UpdateAllUiElements()
     {
+        UpdateHUD();
         UpdateCameraButtonForNpc();
+    }
+
+    public void UpdateHUD()
+    {
+        dayNumText.text = (dayNumText != null) ? GameManager.Instance.player.day.ToString() : "";
     }
 
     private void UpdateCameraButtonForNpc()

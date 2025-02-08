@@ -110,6 +110,7 @@ public abstract class AgentController : MonoBehaviour
             yield break;
         }
         SetActionState(ActionState.usingObject);
+        character.SaveNewAgentMemory("use", $"開始使用{currentUsingObj.objectData.objectNameChi}");
         currentUsingObj.UsingByAgent(this);
     }
 
@@ -118,6 +119,7 @@ public abstract class AgentController : MonoBehaviour
     {
         SetActionState(ActionState.idle);
         SetMovementState(MovementState.none);
+        character.SaveNewAgentMemory("use", $"結束使用{currentUsingObj.objectData.objectNameChi}");
         currentUsingObj = null;
     }
 
@@ -131,30 +133,39 @@ public abstract class AgentController : MonoBehaviour
                 (isFirstChat || Time.time - lastChatTime >= character.chatCoolDown));
     }
     
-    public virtual void Chatting()
+    public virtual void StartChattingWith(string listenerName)
     {
         lastChatTime = Time.time;
         SetActionState(ActionState.chatting);
         SetMovementState(MovementState.none);
     }
 
-    public virtual void SpeakTo(string listenerName, string line)
+    public virtual void Listen(string listeningContent)
     {
-        //把listenerName丟給ai
-        if (!speachBubble.activeInHierarchy) speachBubble.SetActive(true);
-        nameText.text = character.charNameEng; //charNameChi
-        speachText.text = line;
+        //把listeningContent丟給ai
+    }
+
+    public virtual void SayOrRespond(string respondContent)
+    {
+        //請ai丟出一句話
+        ChattingUi(respondContent);
     }
 
     public virtual void SummarizeConversation(string convRecord)
     {
-        character.AgentMemory += "[conv]" + convRecord;
+        character.SaveNewAgentMemory("conv", convRecord);
         NoneChattingUi();
         RestorePreviousAction();
         RestorePreviousMovement();
     }
 
-    public void NoneChattingUi()
+    protected void ChattingUi(string lineDisplay)
+    {
+        if (!speachBubble.activeInHierarchy) speachBubble.SetActive(true);
+        nameText.text = character.charNameEng; //charNameChi
+        speachText.text = lineDisplay;
+    }
+    protected void NoneChattingUi()
     {
         nameText.text = "";
         speachText.text = "";

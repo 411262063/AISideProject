@@ -31,11 +31,13 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        StartCoroutine(DayCycleProcess());
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        StopCoroutine(DayCycleProcess());
     }
 
     private void Update()
@@ -50,12 +52,33 @@ public class GameManager : MonoBehaviour
         UpdateActiveUsableObjects();
         PlayerInterfaceUi.Instance?.UpdateAllUiElements();
     }
+    public string GetActiveScene() => currentScene;
+
+    private IEnumerator DayCycleProcess()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(180f); //5mins per day
+            player.day += 1;
+            PlayerInterfaceUi.Instance.UpdateHUD();
+            SaveGlobalConvAndAgentsMemory();
+        }
+    }
+    private void SaveGlobalConvAndAgentsMemory()
+    {
+        ChatManager.Instance?.SaveGlobalConvRecordToFile();
+        
+        foreach (var agent in activeAgents)
+        {
+            agent.character.SaveAgentMemoryToFile();
+        }
+    }
 
     private void UpdateActiveAgents()
     {
         activeAgents.Clear();
         activeNpcAgents.Clear();
-        activeAgents.Add(player.characterAgent.GetComponent<AgentController>());
+        activeAgents.Add(FindAnyObjectByType<PlayerController>());
         foreach (var npc in FindObjectsOfType<NpcController>())
         {
             if (npc.character != null)
@@ -75,10 +98,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public string GetActiveScene()
-    {
-        return currentScene;
-    }
+
 
     public void DetectNpcConversation()
     {
