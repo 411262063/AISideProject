@@ -20,7 +20,7 @@ public abstract class AgentController : MonoBehaviour
     public enum ActionState
     {
         idle,
-        usingObject,
+        usingObject, //到達物件當下才設為usingObj，移動中為idle
         chatting,
         wandering,
     }
@@ -103,12 +103,7 @@ public abstract class AgentController : MonoBehaviour
         {
             yield return null;
         }
-        if(currentUsingObj == null)
-        {
-            Debug.Log(character.charNameChi + " 在抵達後找不到 currentUsingObj，取消使用");
-            EndUsingCurrentObject();
-            yield break;
-        }
+        yield return new WaitUntil(() => currentUsingObj != null);
         SetActionState(ActionState.usingObject);
         character.SaveNewAgentMemory("use", $"開始使用{currentUsingObj.objectData.objectNameChi}");
         currentUsingObj.UsingByAgent(this);
@@ -117,10 +112,9 @@ public abstract class AgentController : MonoBehaviour
 
     public void EndUsingCurrentObject() //invoke by currentUsingObj
     {
-        SetActionState(ActionState.idle);
-        SetMovementState(MovementState.none);
         character.SaveNewAgentMemory("use", $"結束使用{currentUsingObj.objectData.objectNameChi}");
         currentUsingObj = null;
+        SetToFreeState();
     }
 
     #region About Chat/Conversation
@@ -174,6 +168,14 @@ public abstract class AgentController : MonoBehaviour
     #endregion
 
     #region About Action and Movement
+    protected virtual void SetToFreeState()
+    {
+        SetActionState(ActionState.idle);
+        SetMovementState(MovementState.none);
+        //當前無人和目標或任務
+        //npc只有在此狀態下可以DecideNextAction
+    }
+
     protected virtual void SetActionState(ActionState newState)
     {
         //chatting or chattingCoolDown action no need to store in previousAction

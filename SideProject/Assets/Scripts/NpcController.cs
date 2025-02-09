@@ -74,7 +74,8 @@ public class NpcController : AgentController
             yield return null;
         }
         yield return new WaitForSeconds(nextActionCD);
-        DecideNextAction(); 
+        SetActionState(ActionState.idle);
+        SetMovementState(MovementState.none); 
     }
 
     public override void StartChattingWith(string listenerName)
@@ -88,7 +89,7 @@ public class NpcController : AgentController
         switch (currentMovement)
         {
             case MovementState.none:
-                pausedAction = () => DecideNextAction();
+                pausedAction = () => SetToFreeState();
                 break;
 
             case MovementState.moving:
@@ -103,7 +104,7 @@ public class NpcController : AgentController
                 if (currentAction == ActionState.usingObject)
                     pausedAction = () => StartCoroutine(UsingCurrentObjectProcess());
                 else
-                    pausedAction = () => DecideNextAction();
+                    pausedAction = () => SetToFreeState();
                 break;
 
         }
@@ -129,9 +130,8 @@ public class NpcController : AgentController
                 Debug.Log(character.charNameChi + " 想要使用，但 " + targetObj.agentInUse.character.charNameChi + " 已經在使用 "); //物件進入冷卻前正在使用的人agentInUse已經被清空，先檢查null
             else
                 Debug.Log(character.charNameChi + " 想要使用 " + targetObj.objectData.objectNameChi + " 但 還在冷卻中 ");
-            
-            SetMovementState(MovementState.none);
-            DecideNextAction();
+
+            SetToFreeState();
         }
         else
         {

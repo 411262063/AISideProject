@@ -41,16 +41,11 @@ public class UsableObjectController : MonoBehaviour
     private IEnumerator AgentUsingProcess(AgentController agent)
     {
         agentInUse = agent;
-        if(agentInUse == null)
-        {
-            Debug.Log(objectData.objectNameChi + " 找不到正在使用的人 ");
-            yield break;
-        }
+        yield return new WaitUntil(() => agentInUse != null);
         usingState = UsingState.inUse;
-        Debug.Log(agentInUse.character.charNameChi + " 正在使用 " + objectData.objectNameChi);
         yield return new WaitForSeconds(agentInUse.character.objectUsageTime);
-        Debug.Log(agentInUse.character.charNameChi + " 結束使用 " + objectData.objectNameChi);
         agentInUse.EndUsingCurrentObject();
+        yield return null;
         agentInUse = null;
         usingState = UsingState.inCoolDown;
         yield return new WaitForSeconds(objectData.coolDown);
