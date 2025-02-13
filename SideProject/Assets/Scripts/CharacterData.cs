@@ -48,7 +48,7 @@ public class CharacterData : ScriptableObject
 
     public void SaveNewAgentMemory(string label, string memoryContent)
     {
-        string timeStamp = DateTime.Now.ToString("HH:mm");
+        string timeStamp = GameManager.Instance.GetGameTime();
         AgentMemory += $"[{label}]於{timeStamp} {memoryContent}\n";
     }
 

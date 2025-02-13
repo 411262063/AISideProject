@@ -69,7 +69,7 @@ public class ChatManager : MonoBehaviour
         string tempConvRecord = "";
 
         //聊天開始  => 存[人名1, 人名2]，開始時間到tempConvRecord
-        tempConvRecord += $"[{activeSpeaker.character.charNameChi},{passiveSpeaker.character.charNameChi}] 於 {DateTime.Now.ToString("HH:mm")} 開始聊天\n";
+        tempConvRecord += $"[{activeSpeaker.character.charNameChi},{passiveSpeaker.character.charNameChi}] 於 {GameManager.Instance.GetGameTime()} 開始聊天\n";
 
         while (index< currentChatContent.Count)
         {
@@ -93,7 +93,7 @@ public class ChatManager : MonoBehaviour
             index++;
         }
 
-        tempConvRecord += $"[{activeSpeaker.character.charNameChi},{passiveSpeaker.character.charNameChi}] 於 {DateTime.Now.ToString("HH:mm")} 結束聊天";
+        tempConvRecord += $"[{activeSpeaker.character.charNameChi},{passiveSpeaker.character.charNameChi}] 於 {GameManager.Instance.GetGameTime()} 結束聊天";
         GolbalConvRecord += $"{tempConvRecord}\n";
         activeSpeaker.SummarizeConversation(tempConvRecord);
         passiveSpeaker.SummarizeConversation(tempConvRecord);

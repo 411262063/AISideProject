@@ -11,6 +11,7 @@ public class PlayerInterfaceUi : MonoBehaviour
     public static PlayerInterfaceUi Instance;
 
     public TextMeshProUGUI dayNumText;
+    public TextMeshProUGUI timeNumText;
     
     public Transform npcCamButtonsGrp;
     public GameObject npcCamButtonObj;
@@ -48,6 +49,7 @@ public class PlayerInterfaceUi : MonoBehaviour
 
     public void UpdateHUD()
     {
+        timeNumText.text = timeNumText ? GameManager.Instance.GetGameTime() : "00:00:00";
         dayNumText.text = (dayNumText != null) ? GameManager.Instance.player.day.ToString() : "";
     }
 

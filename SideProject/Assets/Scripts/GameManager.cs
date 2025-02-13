@@ -15,6 +15,13 @@ public class GameManager : MonoBehaviour
     public List<UsableObjectController> usableObjects;
     private static string currentScene;
 
+    private float elapsedTime;
+    private const float realSecPerGameDay = 300f; //5 min per day in game
+    private const float gameSecPerDay = 86400f; //24 hour
+    private int currentDay;
+    private int currentHour;
+    private int currentMinute;
+
     private void Awake()
     {
         if(Instance == null)
@@ -26,23 +33,24 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        Time.timeScale = gameSecPerDay / realSecPerGameDay; //加速時間86400/300 = 288倍
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        StartCoroutine(DayCycleProcess());
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        StopCoroutine(DayCycleProcess());
     }
 
-    private void Update()
+    private void Start()
     {
-        DetectNpcConversation();
+        currentDay = player.day;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -54,16 +62,36 @@ public class GameManager : MonoBehaviour
     }
     public string GetActiveScene() => currentScene;
 
-    private IEnumerator DayCycleProcess()
+    private void Update()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(180f); //5mins per day
-            player.day += 1;
-            PlayerInterfaceUi.Instance.UpdateHUD();
-            SaveGlobalConvAndAgentsMemory();
-        }
+        UpdateGameTime();
+        DetectNpcConversation();
     }
+
+    private void UpdateGameTime()
+    {
+        elapsedTime += Time.deltaTime; //經過時間(deltaTime已是加速288倍後的時間)
+        float totalGameSeconds = (elapsedTime / realSecPerGameDay) * gameSecPerDay;
+        currentDay = player.day + Mathf.FloorToInt(totalGameSeconds / gameSecPerDay);
+        currentHour = (int)(totalGameSeconds / 3600) % 24;
+        currentMinute = (int)(totalGameSeconds / 60) % 60;
+        PlayerInterfaceUi.Instance?.UpdateHUD();
+        if (currentDay != player.day) DayEndSettlement();
+    }
+
+    public string GetGameTime()
+    {
+        return $"Day {currentDay}, {currentHour:D2}:{currentMinute:D2}";
+    }
+
+    private void DayEndSettlement()
+    {
+        player.day = currentDay;
+        elapsedTime = 0f;
+        PlayerInterfaceUi.Instance.UpdateHUD();
+        SaveGlobalConvAndAgentsMemory();
+    }
+
     private void SaveGlobalConvAndAgentsMemory()
     {
         ChatManager.Instance?.SaveGlobalConvRecordToFile();
@@ -97,8 +125,6 @@ public class GameManager : MonoBehaviour
             usableObjects.Add(obj);
         }
     }
-
-
 
     public void DetectNpcConversation()
     {
