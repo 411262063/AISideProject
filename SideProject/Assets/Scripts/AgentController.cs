@@ -10,6 +10,7 @@ public abstract class AgentController : MonoBehaviour
     [Header("角色資料")]
     public CharacterData character;
     public float moveSpeed = 3f;
+    public float adjustedMoveSpeed => moveSpeed * GameManager.Instance.timeScale;
 
     [Header("對話框")]
     public GameObject speachBubble;
@@ -71,7 +72,7 @@ public abstract class AgentController : MonoBehaviour
         while (Vector3.Distance(transform.position, targetPos) > precision)
         {
             direction = (targetPos - transform.position).normalized;
-            transform.position += direction * moveSpeed * Time.deltaTime;
+            transform.position += direction * adjustedMoveSpeed * Time.deltaTime;
 
             if(currentMovement == MovementState.approachingToObject 
                 && Vector3.Distance(transform.position, targetPos) <= 1f)

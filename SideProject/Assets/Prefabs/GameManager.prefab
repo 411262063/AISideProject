@@ -46,14 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 11400000, guid: b23ef4e2dc0ceb34ab9f71ba2b2490bd, type: 2}
-  allNpcData:
-  - {fileID: 11400000, guid: 8bb92f8591eeb5a40a761214daa871a5, type: 2}
-  - {fileID: 11400000, guid: 3ecd0ff84a520424e80829448a66b095, type: 2}
   activeAgents: []
   activeNpcAgents: []
-  chatTriggerDistance: 3
-  lowChatIntent: 10
-  currentChatContent: []
+  usableObjects: []
+  realMinutesPerDay: 30
 --- !u!1001 &1869049905872975180
 PrefabInstance:
   m_ObjectHideFlags: 0

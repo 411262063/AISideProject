@@ -25,7 +25,6 @@ MonoBehaviour:
   objectUsageTime: 5
   description: 
   relationship: []
-  AgentMemory: "[use]\u65BC01:09 \u958B\u59CB\u4F7F\u7528\u7092\u83DC\u934B\n[use]\u65BC01:09
-    \u7D50\u675F\u4F7F\u7528\u7092\u83DC\u934B\n"
+  AgentMemory: 
   characterAgent: {fileID: 0}
   currentLocation: {x: 0, y: 0, z: 0}

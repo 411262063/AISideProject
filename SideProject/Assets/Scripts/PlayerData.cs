@@ -8,4 +8,6 @@ public class PlayerData : CharacterData
 {
     [Header("天數")]
     public int day;
+    public int hour;
+    public int minute;
 }

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: character
       value: 
       objectReference: {fileID: 11400000, guid: 54611d3282a64e742be68facde80d640, type: 2}
+    - target: {fileID: 2196768192599736493, guid: f47e2e02e8c385140b41dddcb39c1387, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3018846930948201168, guid: f47e2e02e8c385140b41dddcb39c1387, type: 3}
       propertyPath: m_Name
       value: Npc_Bmo Variant

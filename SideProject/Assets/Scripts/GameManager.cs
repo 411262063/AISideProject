@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     private static string currentScene;
 
     private float elapsedTime;
-    private const float realSecPerGameDay = 300f; //5 min per day in game
-    private const float gameSecPerDay = 86400f; //24 hour
+    public float realMinutesPerDay = 5f; //5 min per day in game
+    public float timeScale => 1440f / realMinutesPerDay;
     private int currentDay;
     private int currentHour;
     private int currentMinute;
@@ -33,9 +33,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        Time.timeScale = gameSecPerDay / realSecPerGameDay; //加速時間86400/300 = 288倍
-        Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
 
     private void OnEnable()
@@ -50,7 +47,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        InitializeGameplayTime();
+    }
+
+    private void InitializeGameplayTime()
+    {
         currentDay = player.day;
+        currentHour = player.hour;
+        currentMinute = player.minute;
+        elapsedTime = currentHour * 60f + currentMinute;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -70,25 +75,25 @@ public class GameManager : MonoBehaviour
 
     private void UpdateGameTime()
     {
-        elapsedTime += Time.deltaTime; //經過時間(deltaTime已是加速288倍後的時間)
-        float totalGameSeconds = (elapsedTime / realSecPerGameDay) * gameSecPerDay;
-        currentDay = player.day + Mathf.FloorToInt(totalGameSeconds / gameSecPerDay);
-        currentHour = (int)(totalGameSeconds / 3600) % 24;
-        currentMinute = (int)(totalGameSeconds / 60) % 60;
+        elapsedTime += Time.unscaledDeltaTime * (timeScale / 60f);
+        currentDay = player.day + Mathf.FloorToInt(elapsedTime / 1440f);
+        currentHour = (int)(elapsedTime / 60) % 24;
+        currentMinute = (int)elapsedTime % 60;
+        player.day = currentDay;
+        player.hour = currentHour;
+        player.minute = currentMinute;
         PlayerInterfaceUi.Instance?.UpdateHUD();
-        if (currentDay != player.day) DayEndSettlement();
+        if (elapsedTime >= 1440f) DayEndSettlement();
     }
 
     public string GetGameTime()
     {
-        return $"Day {currentDay}, {currentHour:D2}:{currentMinute:D2}";
+        return $"Day {player.day}, {player.hour:D2}:{player.minute:D2}";
     }
 
     private void DayEndSettlement()
     {
-        player.day = currentDay;
         elapsedTime = 0f;
-        PlayerInterfaceUi.Instance.UpdateHUD();
         SaveGlobalConvAndAgentsMemory();
     }
 
